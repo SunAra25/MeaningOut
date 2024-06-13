@@ -34,7 +34,7 @@ final class OnboardingViewController: UIViewController {
         button.configuration = config
         button.tintColor = .meaningWhite
         button.backgroundColor = .meaningPrimary
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 20
         
         return button
     }()
