@@ -12,7 +12,7 @@
 		C00A9A0D2C1AFDDF0072AD75 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A9A0C2C1AFDDF0072AD75 /* UIFont+.swift */; };
 		C0ED78932C1AF5720041885F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78922C1AF5720041885F /* AppDelegate.swift */; };
 		C0ED78952C1AF5720041885F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78942C1AF5720041885F /* SceneDelegate.swift */; };
-		C0ED78972C1AF5720041885F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78962C1AF5720041885F /* ViewController.swift */; };
+		C0ED78972C1AF5720041885F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78962C1AF5720041885F /* OnboardingViewController.swift */; };
 		C0ED789C2C1AF5740041885F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0ED789B2C1AF5740041885F /* Assets.xcassets */; };
 		C0ED789F2C1AF5740041885F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = C0ED789E2C1AF5740041885F /* Base */; };
 		C0ED78A82C1AF7F10041885F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C0ED78A72C1AF7F10041885F /* Kingfisher */; };
@@ -27,7 +27,7 @@
 		C0ED788F2C1AF5720041885F /* MeaningOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeaningOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0ED78922C1AF5720041885F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0ED78942C1AF5720041885F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C0ED78962C1AF5720041885F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C0ED78962C1AF5720041885F /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		C0ED789B2C1AF5740041885F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0ED789E2C1AF5740041885F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0ED78A02C1AF5740041885F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 				C0ED78AF2C1AFA5D0041885F /* Extension */,
 				C0ED78922C1AF5720041885F /* AppDelegate.swift */,
 				C0ED78942C1AF5720041885F /* SceneDelegate.swift */,
-				C0ED78962C1AF5720041885F /* ViewController.swift */,
+				C0ED78962C1AF5720041885F /* OnboardingViewController.swift */,
 				C0ED789B2C1AF5740041885F /* Assets.xcassets */,
 				C0ED789D2C1AF5740041885F /* LaunchScreen.storyboard */,
 				C0ED78A02C1AF5740041885F /* Info.plist */,
@@ -167,7 +167,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0ED78972C1AF5720041885F /* ViewController.swift in Sources */,
+				C0ED78972C1AF5720041885F /* OnboardingViewController.swift in Sources */,
 				C00A9A092C1AFAAD0072AD75 /* UIImage+.swift in Sources */,
 				C0ED78932C1AF5720041885F /* AppDelegate.swift in Sources */,
 				C0ED78952C1AF5720041885F /* SceneDelegate.swift in Sources */,

@@ -28,8 +28,8 @@
                                 <rect key="frame" x="0.0" y="316.5" width="414" height="263"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MeaningOut" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKW-jC-eKn">
-                                <rect key="frame" x="100" y="221.5" width="214" height="55"/>
-                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Heavy" family="Avenir Next Condensed" pointSize="40"/>
+                                <rect key="frame" x="84" y="224.5" width="246" height="48"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="40"/>
                                 <color key="textColor" name="Primary"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -41,7 +41,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mRA-WS-fqH" secondAttribute="trailing" id="QTG-4s-3RB"/>
                             <constraint firstItem="mRA-WS-fqH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="UWY-84-AUh"/>
                             <constraint firstItem="mRA-WS-fqH" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="hWJ-VH-Xe4"/>
-                            <constraint firstItem="mRA-WS-fqH" firstAttribute="top" secondItem="uKW-jC-eKn" secondAttribute="bottom" constant="40" id="jgZ-PL-Ixb"/>
+                            <constraint firstItem="mRA-WS-fqH" firstAttribute="top" secondItem="uKW-jC-eKn" secondAttribute="bottom" constant="44" id="jgZ-PL-Ixb"/>
                             <constraint firstItem="oEt-Cm-rxZ" firstAttribute="top" secondItem="mRA-WS-fqH" secondAttribute="bottom" constant="36" id="t0y-bg-8jE"/>
                             <constraint firstItem="oEt-Cm-rxZ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="te2-nL-1v7"/>
                             <constraint firstItem="mRA-WS-fqH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="u3u-0X-tGp"/>

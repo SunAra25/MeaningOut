@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIFont {
+    class var logo: UIFont { .systemFont(ofSize: 40, weight: .black)}
     class var headM: UIFont { .systemFont(ofSize: 16) }
     class var headB: UIFont { .systemFont(ofSize: 16, weight: .heavy) }
     class var bodyM: UIFont { .systemFont(ofSize: 15) }

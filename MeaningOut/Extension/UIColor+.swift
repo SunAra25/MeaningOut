@@ -18,5 +18,5 @@ extension UIColor {
     
     // MARK: ETC
     class var meaningBlack: UIColor? { return UIColor(named: "Black") }
-    class var meaningWhite: UIColor? { return UIColor(named: "white") }
+    class var meaningWhite: UIColor? { return UIColor(named: "White") }
 }
