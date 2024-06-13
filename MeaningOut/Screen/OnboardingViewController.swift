@@ -36,6 +36,8 @@ final class OnboardingViewController: UIViewController {
         button.backgroundColor = .meaningPrimary
         button.layer.cornerRadius = 20
         
+        button.addTarget(nil, action: #selector(startButtonDidTap), for: .touchUpInside)
+        
         return button
     }()
     
@@ -44,8 +46,14 @@ final class OnboardingViewController: UIViewController {
         
         view.backgroundColor = .meaningWhite
         
+        setNavigation()
         setHierachy()
         setConstraints()
+    }
+    
+    func setNavigation() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
     
     private func setHierachy() {
@@ -69,6 +77,11 @@ final class OnboardingViewController: UIViewController {
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(48)
         }
+    }
+    
+    @objc func startButtonDidTap() {
+        let nextVC = NicknameViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 

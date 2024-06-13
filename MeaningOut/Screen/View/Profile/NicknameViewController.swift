@@ -72,8 +72,16 @@ final class NicknameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setNavigation()
         setHierachy()
         setConstraints()
+    }
+    
+    func setNavigation() {
+        navigationItem.title = "PROFILE SETTING"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
     
     func setHierachy() {
