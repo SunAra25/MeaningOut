@@ -73,6 +73,9 @@ final class NicknameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .meaningWhite
+        nicknameTextField.delegate = self
+        
         setNavigation()
         setHierachy()
         setConstraints()
@@ -131,6 +134,65 @@ final class NicknameViewController: UIViewController {
             make.top.equalTo(messageLabel.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(48)
+        }
+    }
+}
+
+extension NicknameViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let nick = textField.text else { return false }
+        
+        var nickname = nick
+        
+        if let last = nick.last, last == " " {
+            nickname.removeLast()
+            textField.text = nickname
+        }
+        
+        let nicknameValid = checkNicknameValid(nickname)
+        
+        if nicknameValid != .valid {
+            showMessage(nicknameValid.rawValue)
+            
+            completedButton.isEnabled = false
+            completedButton.backgroundColor = .meaningGray3
+        } else {
+            completedButton.isEnabled = true
+            completedButton.backgroundColor = .meaningPrimary
+            
+            messageLabel.isHidden = true
+            messageLabel.snp.updateConstraints { make in
+                make.height.equalTo(0)
+            }
+        }
+        
+        return true
+    }
+}
+
+extension NicknameViewController {
+    func checkNicknameValid(_ nickname: String) -> NicknameVaild {
+        if nickname.isEmpty {
+            return .none
+        }
+        
+        if nickname.contains(" ") {
+            return .gap
+        }
+        
+        if nickname.contains("@") {
+            return .symbol
+        }
+        
+        return .valid
+    }
+    
+    func showMessage(_ text: String) {
+        messageLabel.isHidden = false
+        messageLabel.text = text
+        
+        messageLabel.snp.updateConstraints { make in
+            make.height.equalTo(13)
         }
     }
 }

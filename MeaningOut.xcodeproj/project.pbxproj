@@ -12,6 +12,7 @@
 		C00A9A0D2C1AFDDF0072AD75 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A9A0C2C1AFDDF0072AD75 /* UIFont+.swift */; };
 		C00A9A132C1B0A5E0072AD75 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A9A122C1B0A5E0072AD75 /* NicknameViewController.swift */; };
 		C00A9A162C1B0FEE0072AD75 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A9A152C1B0FEE0072AD75 /* ProfileView.swift */; };
+		C00A9A192C1B1D380072AD75 /* NicknameVaild.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A9A182C1B1D380072AD75 /* NicknameVaild.swift */; };
 		C0ED78932C1AF5720041885F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78922C1AF5720041885F /* AppDelegate.swift */; };
 		C0ED78952C1AF5720041885F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78942C1AF5720041885F /* SceneDelegate.swift */; };
 		C0ED78972C1AF5720041885F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78962C1AF5720041885F /* OnboardingViewController.swift */; };
@@ -28,6 +29,7 @@
 		C00A9A0C2C1AFDDF0072AD75 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		C00A9A122C1B0A5E0072AD75 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
 		C00A9A152C1B0FEE0072AD75 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		C00A9A182C1B1D380072AD75 /* NicknameVaild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameVaild.swift; sourceTree = "<group>"; };
 		C0ED788F2C1AF5720041885F /* MeaningOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeaningOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0ED78922C1AF5720041885F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0ED78942C1AF5720041885F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		C00A9A172C1B1D120072AD75 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				C00A9A182C1B1D380072AD75 /* NicknameVaild.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		C0ED78862C1AF5720041885F = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +125,7 @@
 		C0ED78912C1AF5720041885F /* MeaningOut */ = {
 			isa = PBXGroup;
 			children = (
+				C00A9A172C1B1D120072AD75 /* Enum */,
 				C00A9A142C1B0FE20072AD75 /* Components */,
 				C0ED78AF2C1AFA5D0041885F /* Extension */,
 				C00A9A0E2C1B097F0072AD75 /* Resource */,
@@ -221,6 +232,7 @@
 				C00A9A0D2C1AFDDF0072AD75 /* UIFont+.swift in Sources */,
 				C00A9A132C1B0A5E0072AD75 /* NicknameViewController.swift in Sources */,
 				C00A9A0B2C1AFB700072AD75 /* UIColor+.swift in Sources */,
+				C00A9A192C1B1D380072AD75 /* NicknameVaild.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
