@@ -35,6 +35,10 @@ final class ProfileView: UIView {
         profileImageView.image = UIImage(named: "profile_\(imageNum)")
     }
     
+    func changeImage(_ imageNum: Int) {
+        profileImageView.image = UIImage(named: "profile_\(imageNum)")
+    }
+    
     func setLayout() {
         addSubview(profileImageView)
         

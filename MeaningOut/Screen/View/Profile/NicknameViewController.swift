@@ -73,7 +73,7 @@ final class NicknameViewController: UIViewController {
         return button
     }()
     
-    private let random = Int.random(in: 0...11)
+    private var random = Int.random(in: 0...11)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +84,12 @@ final class NicknameViewController: UIViewController {
         setNavigation()
         setHierachy()
         setConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        profileImageView.changeImage(random)
     }
     
     func setNavigation() {
@@ -144,6 +150,11 @@ final class NicknameViewController: UIViewController {
     
     @objc func profileDidTap() {
         let nextVC = ProfileViewController(imageNum: 0, title: .setting)
+        
+        nextVC.completionHandler = { imageNum in
+            self.random = imageNum
+        }
+        
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }

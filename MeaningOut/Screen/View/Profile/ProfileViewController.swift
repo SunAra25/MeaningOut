@@ -57,7 +57,16 @@ final class ProfileViewController: UIViewController {
         return layout
     }()
     
-    let imageNum: Int
+    var imageNum: Int = 0 {
+        didSet {
+            collectionView.reloadData()
+        }
+        
+        willSet {
+            profileView.changeImage(newValue)
+        }
+    }
+    var completionHandler: ((Int) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +77,12 @@ final class ProfileViewController: UIViewController {
         collectionView.dataSource = self
         
         setLayout()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        completionHandler?(imageNum)
     }
     
     init(imageNum: Int, title: ProfileTitle) {
@@ -132,5 +147,9 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.configureCell(index, radius: radius, isSelected: index == imageNum)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        imageNum = indexPath.row
     }
 }
