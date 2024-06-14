@@ -49,11 +49,9 @@ final class NicknameViewController: UIViewController {
     }()
     private let messageLabel: UILabel = {
         let label = UILabel()
-        label.text = "닉네임에 @는 포함할 수 없어요"
         label.textColor = .meaningPrimary
         label.textAlignment = .left
         label.font = .capB
-        label.isHidden = true
         return label
     }()
     private let completedButton: UIButton = {
@@ -138,7 +136,6 @@ final class NicknameViewController: UIViewController {
         messageLabel.snp.makeConstraints { make in
             make.top.equalTo(underlineView.snp.bottom).offset(12)
             make.horizontalEdges.equalToSuperview().inset(24)
-            make.height.equalTo(0)
         }
         
         completedButton.snp.makeConstraints { make in
@@ -160,34 +157,20 @@ final class NicknameViewController: UIViewController {
 }
 
 extension NicknameViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let nick = textField.text else { return false }
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let nick = textField.text else { return }
         
         var nickname = nick
         
-        if let last = nick.last, last == " " {
+        if nickname.contains(" ") {
             nickname.removeLast()
-            textField.text = nickname
         }
         
         let nicknameValid = checkNicknameValid(nickname)
         
-        if nicknameValid != .valid {
-            showMessage(nicknameValid.rawValue)
-            
-            completedButton.isEnabled = false
-            completedButton.backgroundColor = .meaningGray3
-        } else {
-            completedButton.isEnabled = true
-            completedButton.backgroundColor = .meaningPrimary
-            
-            messageLabel.isHidden = true
-            messageLabel.snp.updateConstraints { make in
-                make.height.equalTo(0)
-            }
-        }
-        
-        return true
+        completedButton.isEnabled = nicknameValid == .valid
+        completedButton.backgroundColor = nicknameValid == .valid ? .meaningPrimary : .meaningGray3
+        messageLabel.text = nicknameValid.rawValue
     }
 }
 
@@ -197,23 +180,24 @@ extension NicknameViewController {
             return .none
         }
         
-        if nickname.contains(" ") {
-            return .gap
+        for char in nickname {
+            if ["@", "#", "$", "%"].contains(char) {
+                return .symbol
+            }
+            
+            if char.isNumber {
+                return .number
+            }
+            
+            if char == " " {
+                return .gap
+            }
         }
         
-        if nickname.contains("@") {
-            return .symbol
+        if !(2...9 ~= nickname.count) {
+            return .range
         }
         
         return .valid
-    }
-    
-    func showMessage(_ text: String) {
-        messageLabel.isHidden = false
-        messageLabel.text = text
-        
-        messageLabel.snp.updateConstraints { make in
-            make.height.equalTo(13)
-        }
     }
 }
