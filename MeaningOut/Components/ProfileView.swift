@@ -18,6 +18,13 @@ final class ProfileView: UIView {
         setLayout()
     }
     
+    init(width: CGFloat, color: UIColor?) {
+        super.init(frame: .zero)
+        
+        configureView(image: "", width: width, color: color)
+        setLayout()
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -33,6 +40,10 @@ final class ProfileView: UIView {
         
         profileImageView.image = UIImage(named: image)
         profileImageView.contentMode = .scaleAspectFit
+    }
+    
+    func configureImage(_ imageName: String) {
+        profileImageView.image = UIImage(named: imageName)
     }
     
     func setLayout() {
