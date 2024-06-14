@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 final class NicknameViewController: UIViewController {
+    let userDefaults = UserDefaultsManager()
+    
     private lazy var profileImageView: ProfileView = {
         let view = ProfileView()
         view.configureView(.user, imageNum: random)
@@ -68,6 +70,8 @@ final class NicknameViewController: UIViewController {
         button.layer.cornerRadius = 20
         
         button.isEnabled = false
+        
+        button.addTarget(self, action: #selector(completedBtnDidTap), for: .touchUpInside)
         return button
     }()
     
@@ -153,6 +157,14 @@ final class NicknameViewController: UIViewController {
         }
         
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc func completedBtnDidTap() {
+        guard let nickname = nicknameTextField.text else { return }
+        userDefaults.nickname = nickname
+        userDefaults.imageNum = random
+        
+        // TODO: 메인화면 전환
     }
 }
 
