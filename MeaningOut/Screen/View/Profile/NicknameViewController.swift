@@ -9,11 +9,14 @@ import UIKit
 import SnapKit
 
 final class NicknameViewController: UIViewController {
-    private let profileImageView: ProfileView = {
-        let random = Int.random(in: 0...11)
+    private lazy var profileImageView: ProfileView = {
         let view = ProfileView()
         view.configureView(.user, imageNum: random)
         view.layer.cornerRadius = 50
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileDidTap))
+        view.addGestureRecognizer(tapGesture)
+        
         return view
     }()
     private let cameraView: UIView = {
@@ -70,6 +73,7 @@ final class NicknameViewController: UIViewController {
         return button
     }()
     
+    private let random = Int.random(in: 0...11)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,6 +140,11 @@ final class NicknameViewController: UIViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(48)
         }
+    }
+    
+    @objc func profileDidTap() {
+        let nextVC = ProfileViewController(imageNum: 0, title: .setting)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 

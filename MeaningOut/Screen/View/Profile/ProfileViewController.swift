@@ -17,6 +17,21 @@ final class ProfileViewController: UIViewController {
         
         return view
     }()
+    private let cameraView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .meaningPrimary
+        view.layer.cornerRadius = 16
+        return view
+    }()
+    private let cameraImageView: UIImageView = {
+        let view = UIImageView()
+        
+        view.image = UIImage.camera
+        view.tintColor = .meaningWhite
+        view.contentMode = .scaleAspectFit
+        
+        return view
+    }()
     private lazy var collectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         
@@ -74,14 +89,26 @@ final class ProfileViewController: UIViewController {
     }
 
     func setLayout() {
-        [profileView, collectionView].forEach {
+        [profileView, cameraView, collectionView].forEach {
             view.addSubview($0)
         }
+        
+        cameraView.addSubview(cameraImageView)
         
         profileView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide).inset(32)
             make.size.equalTo(100)
+        }
+        
+        cameraView.snp.makeConstraints { make in
+            make.trailing.bottom.equalTo(profileView)
+            make.size.equalTo(32)
+        }
+        
+        cameraImageView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.horizontalEdges.equalToSuperview().inset(5)
         }
         
         collectionView.snp.makeConstraints { make in
