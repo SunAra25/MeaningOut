@@ -50,9 +50,19 @@ final class SearchViewController: UIViewController {
     }()
     private let tableView: UITableView = {
         let table = UITableView()
-        table.backgroundColor = .red
+        
+        table.separatorStyle = .none
+        table.rowHeight = 40
+        table.register(RecentlyTableViewCell.self, forCellReuseIdentifier: RecentlyTableViewCell.identifier)
+        
         return table
     }()
+    
+    private var recentlyList: [String] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,9 +70,16 @@ final class SearchViewController: UIViewController {
         view.backgroundColor = .meaningWhite
         
         setNavigation()
+        setDelegate()
+        
         setUI()
         setHierachy()
         setConstraints()
+    }
+    
+    func setDelegate() {
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     func setUI() {
@@ -74,6 +91,8 @@ final class SearchViewController: UIViewController {
         
         emptyView.isHidden = !recentlyList.isEmpty
         searchView.isHidden = recentlyList.isEmpty
+        
+        self.recentlyList = recentlyList
     }
     
     func setNavigation() {
@@ -136,8 +155,23 @@ final class SearchViewController: UIViewController {
         }
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(searchLabel.snp.bottom).offset(16)
+            make.top.equalTo(deleteButton.snp.bottom)
             make.horizontalEdges.bottom.equalToSuperview()
         }
+    }
+}
+
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return recentlyList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: RecentlyTableViewCell.identifier, for: indexPath) as! RecentlyTableViewCell
+        let data = recentlyList[indexPath.row]
+        
+        cell.configureCell(data)
+        
+        return cell
     }
 }
