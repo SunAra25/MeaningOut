@@ -85,7 +85,7 @@ final class ProfileViewController: UIViewController {
         completionHandler?(imageNum)
     }
     
-    init(imageNum: Int, title: ProfileTitle) {
+    init(imageNum: Int, title: NaviTitle) {
         self.imageNum = imageNum
         
         super.init(nibName: nil, bundle: nil)

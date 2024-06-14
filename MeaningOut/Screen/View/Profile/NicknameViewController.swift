@@ -95,7 +95,7 @@ final class NicknameViewController: UIViewController {
     }
     
     func setNavigation() {
-        navigationItem.title = "PROFILE SETTING"
+        navigationItem.title = NaviTitle.profileSetting.rawValue
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
