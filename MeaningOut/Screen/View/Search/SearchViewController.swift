@@ -11,7 +11,12 @@ import SnapKit
 final class SearchViewController: UIViewController {
     let userDefaults = UserDefaultsManager()
     
-    private let searchBar = UISearchBar()
+    private let searchBar: UISearchBar = {
+        let bar = UISearchBar()
+        bar.autocorrectionType = .no
+        bar.spellCheckingType = .no
+        return bar
+    }()
     private let emptyView = UIView()
     private let emptyImageView: UIImageView = {
         let view = UIImageView()
@@ -187,12 +192,18 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let target = searchBar.text else { return }
         
-        recentlyList.append(target)
+        if recentlyList.contains(target) {
+            recentlyList.removeAll { $0 == target }
+        }
+        
+        recentlyList.insert(target, at: 0)
+        
         userDefaults.recentlySearch = recentlyList
         
         view.endEditing(true)
+        self.searchBar.text = ""
         
-        let nextVC = ResultViewController()
+        let nextVC = ResultViewController(searchTarget: target)
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
