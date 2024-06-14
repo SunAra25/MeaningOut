@@ -29,4 +29,14 @@ class UserDefaultsManager {
             userDefaults.set(newValue, forKey: "imageNum")
         }
     }
+    
+    var recentlySearch: [String]? {
+        get {
+            userDefaults.array(forKey: "recentlySearch") as? [String]
+        }
+        
+        set {
+            userDefaults.set(newValue, forKey: "recentlySearch")
+        }
+    }
 }
