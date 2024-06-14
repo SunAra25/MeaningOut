@@ -64,6 +64,12 @@ final class SearchViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setUI()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -72,7 +78,6 @@ final class SearchViewController: UIViewController {
         setNavigation()
         setDelegate()
         
-        setUI()
         setHierachy()
         setConstraints()
     }
@@ -80,6 +85,8 @@ final class SearchViewController: UIViewController {
     func setDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
+        
+        searchBar.delegate = self
     }
     
     func setUI() {
@@ -173,5 +180,20 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configureCell(data)
         
         return cell
+    }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let target = searchBar.text else { return }
+        
+        recentlyList.append(target)
+        userDefaults.recentlySearch = recentlyList
+        
+        view.endEditing(true)
+        
+        let nextVC = ResultViewController()
+        
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }

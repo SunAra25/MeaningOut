@@ -20,6 +20,7 @@
 		C034EE7B2C1C2D2D00076357 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034EE7A2C1C2D2D00076357 /* UserDefaultsManager.swift */; };
 		C034EE842C1C30AC00076357 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034EE832C1C30AC00076357 /* SearchViewController.swift */; };
 		C034EE862C1C470A00076357 /* RecentlyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034EE852C1C470A00076357 /* RecentlyTableViewCell.swift */; };
+		C034EE882C1C4EC800076357 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034EE872C1C4EC800076357 /* ResultViewController.swift */; };
 		C0ED78932C1AF5720041885F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78922C1AF5720041885F /* AppDelegate.swift */; };
 		C0ED78952C1AF5720041885F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78942C1AF5720041885F /* SceneDelegate.swift */; };
 		C0ED78972C1AF5720041885F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78962C1AF5720041885F /* OnboardingViewController.swift */; };
@@ -44,6 +45,7 @@
 		C034EE7A2C1C2D2D00076357 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		C034EE832C1C30AC00076357 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		C034EE852C1C470A00076357 /* RecentlyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyTableViewCell.swift; sourceTree = "<group>"; };
+		C034EE872C1C4EC800076357 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		C0ED788F2C1AF5720041885F /* MeaningOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeaningOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0ED78922C1AF5720041885F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0ED78942C1AF5720041885F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			children = (
 				C034EE832C1C30AC00076357 /* SearchViewController.swift */,
 				C034EE852C1C470A00076357 /* RecentlyTableViewCell.swift */,
+				C034EE872C1C4EC800076357 /* ResultViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				C0ED78952C1AF5720041885F /* SceneDelegate.swift in Sources */,
 				C00A9A0D2C1AFDDF0072AD75 /* UIFont+.swift in Sources */,
 				C034EE782C1C1A5A00076357 /* ProfileType.swift in Sources */,
+				C034EE882C1C4EC800076357 /* ResultViewController.swift in Sources */,
 				C00A9A132C1B0A5E0072AD75 /* NicknameViewController.swift in Sources */,
 				C00A9A1D2C1BFD130072AD75 /* NaviTitle.swift in Sources */,
 				C00A9A0B2C1AFB700072AD75 /* UIColor+.swift in Sources */,
