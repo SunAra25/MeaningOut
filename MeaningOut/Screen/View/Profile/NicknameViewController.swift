@@ -11,8 +11,9 @@ import SnapKit
 final class NicknameViewController: UIViewController {
     private let profileImageView: ProfileView = {
         let random = Int.random(in: 0...11)
-        let view = ProfileView(image: "profile_\(random)", width: 5, color: .meaningPrimary)
-        
+        let view = ProfileView()
+        view.configureView(.user, imageNum: random)
+        view.layer.cornerRadius = 50
         return view
     }()
     private let cameraView: UIView = {

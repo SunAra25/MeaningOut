@@ -11,17 +11,9 @@ import SnapKit
 final class ProfileView: UIView {
     private let profileImageView = UIImageView()
     
-    init(image: String, width: CGFloat, color: UIColor?) {
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        configureView(image: image, width: width, color: color)
-        setLayout()
-    }
-    
-    init(width: CGFloat, color: UIColor?) {
-        super.init(frame: .zero)
-        
-        configureView(image: "", width: width, color: color)
         setLayout()
     }
     
@@ -29,28 +21,25 @@ final class ProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureView(image: String, width: CGFloat, color: UIColor?) {
+    func configureView(_ type: ProfileType, imageNum: Int) {
         backgroundColor = .clear
         
-        layer.cornerRadius = 50
-        layer.borderWidth = width
-        layer.borderColor = color?.cgColor
+        layer.borderWidth = type.borderWidth
+        layer.borderColor = type.borderColor?.cgColor
+        
+        alpha = type.alpha
         
         clipsToBounds = true
         
-        profileImageView.image = UIImage(named: image)
         profileImageView.contentMode = .scaleAspectFit
-    }
-    
-    func configureImage(_ imageName: String) {
-        profileImageView.image = UIImage(named: imageName)
+        profileImageView.image = UIImage(named: "profile_\(imageNum)")
     }
     
     func setLayout() {
         addSubview(profileImageView)
         
         profileImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(2)
+            make.edges.equalToSuperview()
         }
     }
 }

@@ -11,12 +11,7 @@ import SnapKit
 final class ProfileCollectionViewCell: UICollectionViewCell {
     static let identifier = "ProfileCollectionViewCell"
     
-    private let profileView: ProfileView = {
-        let view = ProfileView(width: 1, color: .meaningGray1)
-        view.alpha = 0.5
-        
-        return view
-    }()
+    private let profileView = ProfileView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,8 +23,9 @@ final class ProfileCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(_ name: String) {
-        profileView.configureImage(name)
+    func configureCell(_ num: Int, radius: CGFloat, isSelected: Bool) {
+        profileView.configureView(isSelected ? .selected : .example, imageNum: num)
+        profileView.layer.cornerRadius = radius
     }
     
     func setLayout() {

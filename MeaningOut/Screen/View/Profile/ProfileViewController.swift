@@ -10,7 +10,10 @@ import SnapKit
 
 final class ProfileViewController: UIViewController {
     private lazy var profileView: ProfileView = {
-        let view = ProfileView(image: "profile_\(imageNum)", width: 5, color: .meaningPrimary)
+        let view = ProfileView()
+        
+        view.configureView(.user, imageNum: imageNum)
+        view.layer.cornerRadius = 50
         
         return view
     }()
@@ -96,7 +99,11 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCollectionViewCell.identifier, for: indexPath) as! ProfileCollectionViewCell
         
-        cell.configureCell("profile_\(indexPath.row)")
+        let index = indexPath.row
+        let radius = cell.bounds.width / 2
+        
+        cell.configureCell(index, radius: radius, isSelected: index == imageNum)
+        
         return cell
     }
 }
