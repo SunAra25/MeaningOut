@@ -81,11 +81,12 @@ final class ResultViewController: UIViewController {
     private let target: String
     private var start = 1
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .meaningWhite
+        
+        setNavigation()
         setHierachy()
         setConstraints()
     }
@@ -100,6 +101,12 @@ final class ResultViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setNavigation() {
+        navigationItem.title = target
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
     
     func setHierachy() {
@@ -192,6 +199,13 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.configureCell(data)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let data = searchResult.items[indexPath.row]
+        let nextVC = DetailViewController(productName: data.title, link: data.link)
+        
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
