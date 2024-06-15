@@ -40,11 +40,26 @@ final class ResultViewController: UIViewController {
     }()
     private lazy var resultCollectionView: UICollectionView = {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collection.backgroundColor = .lightGray
+        
+        collection.delegate = self
+        collection.dataSource = self
+        collection.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.identifier)
+        
         return collection
     }()
     private let flowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
+        
+        layout.minimumLineSpacing = 16
+        layout.minimumInteritemSpacing = 16
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let inset: CGFloat = 16
+        let padding: CGFloat = 16
+        let width = (screenWidth - inset * 2 - padding ) / 2
+        
+        layout.itemSize = CGSize(width: width, height: width * 1.8)
+        layout.sectionInset = UIEdgeInsets.init(top: 0, left: 16, bottom: 0, right: 16)
         
         return layout
     }()
@@ -114,7 +129,19 @@ final class ResultViewController: UIViewController {
             parameters: parameters,
             headers: headers
         ).responseString { response in
-            print(response)
+            //print(response)
         }
+    }
+}
+
+extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as! ResultCollectionViewCell
+        
+        return cell
     }
 }
