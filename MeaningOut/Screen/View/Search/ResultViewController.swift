@@ -9,12 +9,6 @@ import UIKit
 import Alamofire
 import SnapKit
 
-#if DEBUG
-@available(iOS 17, *)
-#Preview {
-    UINavigationController(rootViewController: ResultViewController(searchTarget: "기계식 키보드"))
-}
-#endif
 final class ResultViewController: UIViewController {
     private let totalCountLabel: UILabel = {
         let label = UILabel()
@@ -33,12 +27,12 @@ final class ResultViewController: UIViewController {
         
         return view
     }()
-    private let sortButtons: [UIButton] = {
+    private lazy var sortButtons: [UIButton] = {
         var array: [UIButton] = []
         SortBy.allCases.forEach {
-            let button = CapsuleButton(title: $0.rawValue, tag: $0.index)
-            button.isSelect = $0.index == 0
-        
+            let button = CapsuleButton(title: $0.title, tag: $0.rawValue)
+            button.isSelect = $0.rawValue == 0
+            button.addTarget(self, action: #selector(sortButtonDidTap(_: )), for: .touchUpInside)
             array.append(button)
         }
         
@@ -75,6 +69,12 @@ final class ResultViewController: UIViewController {
     private var searchResult: SearchResponse = SearchResponse(total: 0, start: 0, display: 30, items: []) {
         didSet {
             resultCollectionView.reloadData()
+        }
+    }
+    private lazy var sort: SortBy = .accuracy {
+        didSet {
+            start = 1
+            callRequest(target)
         }
     }
     
@@ -140,7 +140,8 @@ final class ResultViewController: UIViewController {
         let parameters: Parameters = [
             "query" : target,
             "display" : 30,
-            "start" : start
+            "start" : start,
+            "sort" : sort.value
         ]
         let headers: HTTPHeaders = [
             Header.id : APIKey.clientId,
@@ -161,11 +162,21 @@ final class ResultViewController: UIViewController {
                     searchResult = value
                     totalCountLabel.text = value.total.formatted() + "개의 검색 결과"
                     totalCountLabel.layoutIfNeeded()
+                    resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                 }
             case .failure(let error):
                 print(error)
             }
         }
+    }
+    
+    @objc func sortButtonDidTap(_ sender: CapsuleButton) {
+        sortButtons.forEach {
+            guard let button = $0 as? CapsuleButton else { return }
+            button.isSelect = button == sender
+        }
+        
+        sort = SortBy(rawValue: sender.tag) ?? .accuracy
     }
 }
 

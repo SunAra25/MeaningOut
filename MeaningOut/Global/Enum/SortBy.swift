@@ -7,18 +7,27 @@
 
 import Foundation
 
-enum SortBy: String, CaseIterable {
-    case accuracy = "정확도"
-    case date = "날짜순"
-    case expensive = "가격높은순"
-    case cheap = "가격낮은순"
+enum SortBy: Int, CaseIterable {
+    case accuracy = 0
+    case date
+    case expensive
+    case cheap
     
-    var index: Int {
+    var title: String {
         switch self {
-        case .accuracy: 0
-        case .date: 1
-        case .expensive: 2
-        case .cheap: 3
+        case .accuracy: "정확도"
+        case .date: "날짜순"
+        case .expensive: "가격높은순"
+        case .cheap: "가격낮은순"
+        }
+    }
+    
+    var value: String {
+        switch self {
+        case .accuracy: "sim"
+        case .date: "date"
+        case .expensive: "dsc"
+        case .cheap: "asc"
         }
     }
 }
