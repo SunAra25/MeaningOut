@@ -67,6 +67,10 @@ final class SearchViewController: UIViewController {
         didSet {
             tableView.reloadData()
         }
+        
+        willSet {
+            userDefaults.recentlySearch = newValue
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -183,8 +187,19 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let data = recentlyList[indexPath.row]
         
         cell.configureCell(data)
+        cell.selectionStyle = .none
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let target = recentlyList[indexPath.row]
+        recentlyList.remove(at: indexPath.row)
+        recentlyList.insert(target, at: 0)
+        
+        let nextVC = ResultViewController(searchTarget: target)
+        
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
@@ -197,8 +212,6 @@ extension SearchViewController: UISearchBarDelegate {
         }
         
         recentlyList.insert(target, at: 0)
-        
-        userDefaults.recentlySearch = recentlyList
         
         view.endEditing(true)
         self.searchBar.text = ""
