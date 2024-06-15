@@ -9,7 +9,15 @@ import UIKit
 import Alamofire
 import SnapKit
 
+#if DEBUG
+@available(iOS 17, *)
+#Preview {
+    UINavigationController(rootViewController: ResultViewController(searchTarget: "기계식 키보드"))
+}
+#endif
 final class ResultViewController: UIViewController {
+    private let userDefaults = UserDefaultsManager()
+    
     private let totalCountLabel: UILabel = {
         let label = UILabel()
         label.textColor = .meaningPrimary
@@ -77,9 +85,19 @@ final class ResultViewController: UIViewController {
             callRequest(target)
         }
     }
+    private var likeList: [String] {
+        willSet {
+            userDefaults.likeList = newValue
+        }
+    }
     
     private let target: String
     private var start = 1
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        resultCollectionView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +111,12 @@ final class ResultViewController: UIViewController {
     
     init(searchTarget target: String) {
         self.target = target
+        
+        if let list = userDefaults.likeList {
+            likeList = list
+        } else {
+            likeList = []
+        }
         
         super.init(nibName: nil, bundle: nil)
         
@@ -196,16 +220,41 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as! ResultCollectionViewCell
         let data = searchResult.items[indexPath.row]
         
-        cell.configureCell(data)
-        
+        cell.configureCell(data, isLike: likeList.contains(data.productId))
+        cell.likeButton.tag = indexPath.row
+        cell.likeButton.addTarget(self, action: #selector(likeBtnDidTap), for: .touchUpInside)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let data = searchResult.items[indexPath.row]
-        let nextVC = DetailViewController(productName: data.title, link: data.link)
+        let isContains = likeList.contains(data.productId)
+        let nextVC = DetailViewController(productName: data.title, link: data.link, isLike: isContains)
+        
+        nextVC.completionHandler = { [weak self] isLike in
+            guard let self else { return }
+            
+            if isContains && !isLike {
+                likeList.removeAll { $0 == data.productId }
+            } else if !isContains && isLike {
+                likeList.append(data.productId)
+            }
+        }
         
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc func likeBtnDidTap(sender: UIButton) {
+        let productId = searchResult.items[sender.tag].productId
+        let isContains = likeList.contains(productId)
+        
+        if isContains {
+            likeList.removeAll { $0 == productId }
+        } else {
+            likeList.append(productId)
+        }
+        
+        resultCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
     }
 }
 

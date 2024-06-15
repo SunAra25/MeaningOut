@@ -41,12 +41,12 @@ final class ResultCollectionViewCell: UICollectionViewCell {
         label.font = .bodyB
         return label
     }()
-    private let likeButton: UIButton = {
+    let likeButton: UIButton = {
         let button = UIButton()
         var config = UIButton.Configuration.filled()
         
         config.image = UIImage.likeUnselected
-        config.baseBackgroundColor = .meaningBlack?.withAlphaComponent(0.5)
+        config.baseBackgroundColor = .meaningBlack?.withAlphaComponent(0.3)
         
         button.configuration = config
         return button
@@ -62,7 +62,7 @@ final class ResultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(_ data: Product) {
+    func configureCell(_ data: Product, isLike: Bool) {
         let imageURL = URL(string: data.image)
         productImageView.kf.setImage(with: imageURL)
         
@@ -77,6 +77,11 @@ final class ResultCollectionViewCell: UICollectionViewCell {
             
             priceLabel.text = low.formatted() + "~" + hight.formatted() + "원"
         }
+        
+        var config = likeButton.configuration ?? UIButton.Configuration.filled()
+        config.image = isLike ? .likeSelected : .likeUnselected
+        config.baseBackgroundColor = isLike ? .meaningWhite : .meaningBlack?.withAlphaComponent(0.5)
+        likeButton.configuration = config
     }
     
     func setLayout() {

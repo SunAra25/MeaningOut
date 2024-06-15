@@ -19,15 +19,24 @@ final class DetailViewController: UIViewController {
         return view
     }()
     private let urlLink: URL?
+    private var isLike: Bool {
+        willSet {
+            navigationItem.rightBarButtonItem?.image = newValue ? .likeSelected : .likeUnselected.withRenderingMode(.alwaysOriginal)
+        }
+    }
+    
+    var completionHandler: ((Bool) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .meaningWhite
         setLayout()
     }
     
-    init(productName: String, link: String) {
+    init(productName: String, link: String, isLike: Bool) {
         urlLink = URL(string: link)
+        self.isLike = isLike
         
         super.init(nibName: nil, bundle: nil)
         
@@ -43,6 +52,16 @@ final class DetailViewController: UIViewController {
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .meaningBlack
+        
+        let barButtonItem = UIBarButtonItem(image: isLike ? UIImage.likeSelected : UIImage.likeUnselected.withRenderingMode(.alwaysOriginal),
+                                            style: .plain, target: self, action: #selector(likeBtnDidTap))
+        
+        barButtonItem.tintColor = .meaningBlack
+        navigationItem.rightBarButtonItem = barButtonItem
+    }
+    
+    func setLikeButton() {
+        
     }
     
     func setLayout() {
@@ -51,5 +70,10 @@ final class DetailViewController: UIViewController {
         webView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    @objc func likeBtnDidTap() {
+        isLike.toggle()
+        completionHandler?(isLike)
     }
 }

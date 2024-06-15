@@ -39,4 +39,14 @@ class UserDefaultsManager {
             userDefaults.set(newValue, forKey: "recentlySearch")
         }
     }
+    
+    var likeList: [String]? {
+        get {
+            userDefaults.array(forKey: "likeList") as? [String]
+        }
+        
+        set {
+            userDefaults.set(newValue, forKey: "likeList")
+        }
+    }
 }
