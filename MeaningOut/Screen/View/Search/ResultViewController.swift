@@ -9,6 +9,12 @@ import UIKit
 import Alamofire
 import SnapKit
 
+#if DEBUG
+@available(iOS 17, *)
+#Preview {
+    UINavigationController(rootViewController: ResultViewController(searchTarget: "기계식 키보드"))
+}
+#endif
 final class ResultViewController: UIViewController {
     private let totalCountLabel: UILabel = {
         let label = UILabel()
@@ -43,6 +49,8 @@ final class ResultViewController: UIViewController {
         
         collection.delegate = self
         collection.dataSource = self
+        collection.prefetchDataSource = self
+        
         collection.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.identifier)
         
         return collection
@@ -64,6 +72,16 @@ final class ResultViewController: UIViewController {
         return layout
     }()
     
+    private var searchResult: SearchResponse = SearchResponse(total: 0, start: 0, display: 30, items: []) {
+        didSet {
+            resultCollectionView.reloadData()
+        }
+    }
+    
+    private let target: String
+    private var start = 1
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -73,7 +91,10 @@ final class ResultViewController: UIViewController {
     }
     
     init(searchTarget target: String) {
+        self.target = target
+        
         super.init(nibName: nil, bundle: nil)
+        
         callRequest(target)
     }
     
@@ -117,7 +138,9 @@ final class ResultViewController: UIViewController {
     func callRequest(_ target: String) {
         let url = APIURL.searchURL
         let parameters: Parameters = [
-            "query" : target
+            "query" : target,
+            "display" : 30,
+            "start" : start
         ]
         let headers: HTTPHeaders = [
             Header.id : APIKey.clientId,
@@ -128,20 +151,47 @@ final class ResultViewController: UIViewController {
             url,
             parameters: parameters,
             headers: headers
-        ).responseString { response in
-            //print(response)
+        ).responseDecodable(of: SearchResponse.self) { [weak self] response in
+            guard let self else { return }
+            switch response.result {
+            case .success(let value):
+                if start > 1 {
+                    searchResult.items += value.items
+                } else {
+                    searchResult = value
+                    totalCountLabel.text = value.total.formatted() + "개의 검색 결과"
+                    totalCountLabel.layoutIfNeeded()
+                }
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }
 
 extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return searchResult.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as! ResultCollectionViewCell
+        let data = searchResult.items[indexPath.row]
+        
+        cell.configureCell(data)
         
         return cell
+    }
+}
+
+extension ResultViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        
+        let count = searchResult.items.count
+        
+        if count - 4 < indexPaths[0].row {
+            start += 30
+            callRequest(target)
+        }
     }
 }

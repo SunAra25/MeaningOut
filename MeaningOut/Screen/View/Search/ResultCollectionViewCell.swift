@@ -7,12 +7,14 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 final class ResultCollectionViewCell: UICollectionViewCell {
     static let identifier = "ResultCollectionViewCell"
     
     private let productImageView: UIImageView = {
         let view = UIImageView()
+        view.clipsToBounds = true
         view.layer.cornerRadius = 15
         view.contentMode = .scaleAspectFill
         return view
@@ -58,6 +60,23 @@ final class ResultCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configureCell(_ data: Product) {
+        let imageURL = URL(string: data.image)
+        productImageView.kf.setImage(with: imageURL)
+        
+        mallNameLabel.text = data.mallName
+        productNameLabel.text = data.title
+        
+        if data.hprice.isEmpty {
+            guard let price = Int(data.lprice) else { return }
+            priceLabel.text = price.formatted() + "원"
+        } else {
+            guard let low = Int(data.lprice), let hight = Int(data.hprice) else { return }
+            
+            priceLabel.text = low.formatted() + "~" + hight.formatted() + "원"
+        }
     }
     
     func setLayout() {
