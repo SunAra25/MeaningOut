@@ -11,10 +11,16 @@ import SnapKit
 final class ProfileView: UIView {
     private let profileImageView = UIImageView()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
         
         setLayout()
+    }
+    
+    convenience init(_ type: ProfileType, imageNum: Int) {
+        self.init()
+        
+        configureView(type, imageNum: imageNum)
     }
     
     required init?(coder: NSCoder) {

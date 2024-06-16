@@ -12,8 +12,7 @@ final class NicknameViewController: UIViewController {
     let userDefaults = UserDefaultsManager()
     
     private lazy var profileImageView: ProfileView = {
-        let view = ProfileView()
-        view.configureView(.user, imageNum: random)
+        let view = ProfileView(.user, imageNum: random)
         view.layer.cornerRadius = 50
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileDidTap))
@@ -75,7 +74,11 @@ final class NicknameViewController: UIViewController {
         return button
     }()
     
-    private var random = Int.random(in: 0...11)
+    private var random = Int.random(in: 0...11) {
+        willSet {
+            profileImageView.changeImage(newValue)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,12 +89,6 @@ final class NicknameViewController: UIViewController {
         setNavigation()
         setHierachy()
         setConstraints()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        profileImageView.changeImage(random)
     }
     
     func setNavigation() {
@@ -150,7 +147,7 @@ final class NicknameViewController: UIViewController {
     }
     
     @objc func profileDidTap() {
-        let nextVC = ProfileViewController(imageNum: 0, title: .setting)
+        let nextVC = ProfileViewController(imageNum: random)
         
         nextVC.completionHandler = { imageNum in
             self.random = imageNum

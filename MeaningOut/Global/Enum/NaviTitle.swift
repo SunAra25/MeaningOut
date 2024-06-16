@@ -10,6 +10,6 @@ import Foundation
 enum NaviTitle: String {
     case profileSetting = "PROFILE SETTING"
     case profileEdit = "EDIT PROFILE"
-    case search = "'s MEANING OUT"
+    case search = "님의 MEANING OUT"
     case setting = "SETTING"
 }

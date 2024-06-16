@@ -10,9 +10,8 @@ import SnapKit
 
 final class ProfileViewController: UIViewController {
     private lazy var profileView: ProfileView = {
-        let view = ProfileView()
+        let view = ProfileView(.user, imageNum: imageNum)
         
-        view.configureView(.user, imageNum: imageNum)
         view.layer.cornerRadius = 50
         
         return view
@@ -57,7 +56,7 @@ final class ProfileViewController: UIViewController {
         return layout
     }()
     
-    var imageNum: Int = 0 {
+    var imageNum: Int {
         didSet {
             collectionView.reloadData()
         }
@@ -85,20 +84,20 @@ final class ProfileViewController: UIViewController {
         completionHandler?(imageNum)
     }
     
-    init(imageNum: Int, title: NaviTitle) {
+    init(imageNum: Int) {
         self.imageNum = imageNum
         
         super.init(nibName: nil, bundle: nil)
         
-        setNavigation(title.rawValue)
+        setNavigation()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setNavigation(_ title: String) {
-        navigationItem.title = title
+    func setNavigation() {
+        navigationItem.title = NaviTitle.profileSetting.rawValue
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
