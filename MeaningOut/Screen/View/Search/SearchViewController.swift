@@ -13,6 +13,7 @@ final class SearchViewController: UIViewController {
     
     private let searchBar: UISearchBar = {
         let bar = UISearchBar()
+        bar.returnKeyType = .search
         bar.autocorrectionType = .no
         bar.spellCheckingType = .no
         return bar
@@ -51,6 +52,7 @@ final class SearchViewController: UIViewController {
         config.baseForegroundColor = .meaningPrimary
         
         button.configuration = config
+        button.addTarget(self, action: #selector(deleteAllBtnDidTap), for: .touchUpInside)
         return button
     }()
     private let tableView: UITableView = {
@@ -70,6 +72,9 @@ final class SearchViewController: UIViewController {
         
         willSet {
             userDefaults.recentlySearch = newValue
+            
+            tableView.isHidden = newValue.isEmpty
+            emptyView.isHidden = !newValue.isEmpty
         }
     }
     
@@ -175,6 +180,10 @@ final class SearchViewController: UIViewController {
             make.horizontalEdges.bottom.equalToSuperview()
         }
     }
+    
+    @objc func deleteAllBtnDidTap() {
+        recentlyList.removeAll()
+    }
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -187,6 +196,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let data = recentlyList[indexPath.row]
         
         cell.configureCell(data)
+        cell.deleteButton.tag = indexPath.row
+        cell.deleteButton.addTarget(self, action: #selector(deleteButtonDidTap), for: .touchUpInside)
         cell.selectionStyle = .none
         
         return cell
@@ -200,6 +211,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let nextVC = ResultViewController(searchTarget: target)
         
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc func deleteButtonDidTap(_ sender: UIButton) {
+        recentlyList.remove(at: sender.tag)
     }
 }
 

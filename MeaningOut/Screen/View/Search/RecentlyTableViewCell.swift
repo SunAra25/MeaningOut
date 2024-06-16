@@ -24,7 +24,7 @@ final class RecentlyTableViewCell: UITableViewCell {
         label.font = .subM
         return label
     }()
-    private let deleteButton: UIButton = {
+    let deleteButton: UIButton = {
         let button = UIButton()
         var config = UIButton.Configuration.plain()
         
