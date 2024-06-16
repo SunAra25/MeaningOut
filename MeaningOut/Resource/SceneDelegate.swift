@@ -10,13 +10,19 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    let userDefaults = UserDefaultsManager()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = SettingViewController()
+        window?.rootViewController = MainTabBarController()
+        window?.makeKeyAndVisible()
+        
+        let createdAt = userDefaults.createdAt
+        let rootViewController = createdAt.isEmpty ? OnboardingViewController() : MainTabBarController()
+        
+        window?.rootViewController = createdAt.isEmpty ? UINavigationController(rootViewController: OnboardingViewController()) : MainTabBarController()
         window?.makeKeyAndVisible()
     }
 

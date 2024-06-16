@@ -20,9 +20,11 @@ class MainTabBarController: UITabBarController {
         UITabBar.appearance().unselectedItemTintColor = .meaningBlack
         
         let searchViewContrller = UINavigationController(rootViewController: SearchViewController())
+        let settingViewController = UINavigationController(rootViewController: SettingViewController())
         
         searchViewContrller.tabBarItem = UITabBarItem(title: "검색", image: UIImage.magnifyingglass, tag: 0)
+        settingViewController.tabBarItem = UITabBarItem(title: "설정", image: UIImage.person, tag: 1)
         
-        viewControllers = [searchViewContrller]
+        viewControllers = [searchViewContrller, settingViewController]
     }
 }
