@@ -8,6 +8,13 @@
 import UIKit
 import SnapKit
 
+#if DEBUG
+@available(iOS 17, *)
+#Preview {
+    UINavigationController(rootViewController: SettingViewController())
+}
+#endif
+
 final class SettingViewController: UIViewController {
     private let userDefaults = UserDefaultsManager()
     
@@ -44,12 +51,18 @@ final class SettingViewController: UIViewController {
     }()
     private let tableView: UITableView = {
         let table = UITableView()
-        table.backgroundColor = .lightGray
+        
+        table.register(CartTableViewCell.self, forCellReuseIdentifier: CartTableViewCell.identifier)
+        table.register(DefaultTableViewCell.self, forCellReuseIdentifier: DefaultTableViewCell.identifier)
+        
         return table
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         setNavigation()
         setHierachy()
@@ -111,6 +124,31 @@ final class SettingViewController: UIViewController {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(profileView.snp.bottom)
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+}
+
+extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Setting.allCases.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let data = Setting.allCases[indexPath.row].rawValue
+        
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: CartTableViewCell.identifier, for: indexPath) as! CartTableViewCell
+            guard let list = userDefaults.likeList else { return cell }
+            
+            cell.selectionStyle = .none
+            cell.configureCell(data, numOfLike: list.count)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: DefaultTableViewCell.identifier, for: indexPath) as! DefaultTableViewCell
+            
+            cell.selectionStyle = .none
+            cell.configureCell(data)
+            return cell
         }
     }
 }

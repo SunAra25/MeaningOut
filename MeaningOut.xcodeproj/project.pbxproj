@@ -25,6 +25,9 @@
 		C034EE8C2C1C8A6400076357 /* SortBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034EE8B2C1C8A6400076357 /* SortBy.swift */; };
 		C034EE8E2C1C8C6700076357 /* CapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034EE8D2C1C8C6700076357 /* CapsuleButton.swift */; };
 		C065591C2C1F1646000E63B9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C065591B2C1F1646000E63B9 /* SettingViewController.swift */; };
+		C065591E2C1F2BB9000E63B9 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C065591D2C1F2BB9000E63B9 /* CartTableViewCell.swift */; };
+		C06559202C1F2BC5000E63B9 /* DefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C065591F2C1F2BC5000E63B9 /* DefaultTableViewCell.swift */; };
+		C06559222C1F3235000E63B9 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06559212C1F3235000E63B9 /* Setting.swift */; };
 		C08314382C1D27A00031405E /* ResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08314372C1D279F0031405E /* ResultCollectionViewCell.swift */; };
 		C083143A2C1D5E9A0031405E /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08314392C1D5E9A0031405E /* Product.swift */; };
 		C083143C2C1D7B6D0031405E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C083143B2C1D7B6D0031405E /* DetailViewController.swift */; };
@@ -58,6 +61,9 @@
 		C034EE8B2C1C8A6400076357 /* SortBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortBy.swift; sourceTree = "<group>"; };
 		C034EE8D2C1C8C6700076357 /* CapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButton.swift; sourceTree = "<group>"; };
 		C065591B2C1F1646000E63B9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		C065591D2C1F2BB9000E63B9 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
+		C065591F2C1F2BC5000E63B9 /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
+		C06559212C1F3235000E63B9 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		C08314372C1D279F0031405E /* ResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		C08314392C1D5E9A0031405E /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		C083143B2C1D7B6D0031405E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +150,7 @@
 				C00A9A1C2C1BFD130072AD75 /* NaviTitle.swift */,
 				C034EE772C1C1A5A00076357 /* ProfileType.swift */,
 				C034EE8B2C1C8A6400076357 /* SortBy.swift */,
+				C06559212C1F3235000E63B9 /* Setting.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -176,6 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				C065591B2C1F1646000E63B9 /* SettingViewController.swift */,
+				C065591D2C1F2BB9000E63B9 /* CartTableViewCell.swift */,
+				C065591F2C1F2BC5000E63B9 /* DefaultTableViewCell.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -305,6 +314,7 @@
 				C08314382C1D27A00031405E /* ResultCollectionViewCell.swift in Sources */,
 				C083143A2C1D5E9A0031405E /* Product.swift in Sources */,
 				C034EE8C2C1C8A6400076357 /* SortBy.swift in Sources */,
+				C065591E2C1F2BB9000E63B9 /* CartTableViewCell.swift in Sources */,
 				C0ED78972C1AF5720041885F /* OnboardingViewController.swift in Sources */,
 				C065591C2C1F1646000E63B9 /* SettingViewController.swift in Sources */,
 				C00A9A092C1AFAAD0072AD75 /* UIImage+.swift in Sources */,
@@ -313,6 +323,8 @@
 				C00A9A0D2C1AFDDF0072AD75 /* UIFont+.swift in Sources */,
 				C034EE782C1C1A5A00076357 /* ProfileType.swift in Sources */,
 				C034EE882C1C4EC800076357 /* ResultViewController.swift in Sources */,
+				C06559222C1F3235000E63B9 /* Setting.swift in Sources */,
+				C06559202C1F2BC5000E63B9 /* DefaultTableViewCell.swift in Sources */,
 				C00A9A132C1B0A5E0072AD75 /* NicknameViewController.swift in Sources */,
 				C00A9A1D2C1BFD130072AD75 /* NaviTitle.swift in Sources */,
 				C00A9A0B2C1AFB700072AD75 /* UIColor+.swift in Sources */,
