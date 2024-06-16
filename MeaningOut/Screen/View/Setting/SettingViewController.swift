@@ -62,6 +62,13 @@ final class SettingViewController: UIViewController {
         return table
     }()
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
