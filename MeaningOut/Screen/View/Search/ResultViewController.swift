@@ -9,12 +9,6 @@ import UIKit
 import Alamofire
 import SnapKit
 
-#if DEBUG
-@available(iOS 17, *)
-#Preview {
-    UINavigationController(rootViewController: ResultViewController(searchTarget: "기계식 키보드"))
-}
-#endif
 final class ResultViewController: UIViewController {
     private let userDefaults = UserDefaultsManager()
     
