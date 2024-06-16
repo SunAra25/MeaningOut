@@ -8,13 +8,6 @@
 import UIKit
 import SnapKit
 
-#if DEBUG
-@available(iOS 17, *)
-#Preview {
-    UINavigationController(rootViewController: SettingViewController())
-}
-#endif
-
 final class SettingViewController: UIViewController {
     private let userDefaults = UserDefaultsManager()
     
@@ -29,16 +22,18 @@ final class SettingViewController: UIViewController {
         return view
     }()
     private let labelView = UIView()
-    private let nicknameLabel: UILabel = {
+    private lazy var nicknameLabel: UILabel = {
         let label = UILabel()
+        label.text = userDefaults.nickname
         label.textColor = .meaningBlack
         label.textAlignment = .left
         label.font = .headB
         return label
     }()
-    private let dateLabel: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .gray2
+        label.text = userDefaults.createdAt + "가입"
+        label.textColor = .meaningGray2
         label.textAlignment = .left
         label.font = .capM
         return label
@@ -49,17 +44,28 @@ final class SettingViewController: UIViewController {
         view.tintColor = .meaningBlack
         return view
     }()
+    private let dividerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .meaningBlack?.withAlphaComponent(0.8)
+        return view
+    }()
     private let tableView: UITableView = {
         let table = UITableView()
         
         table.register(CartTableViewCell.self, forCellReuseIdentifier: CartTableViewCell.identifier)
         table.register(DefaultTableViewCell.self, forCellReuseIdentifier: DefaultTableViewCell.identifier)
         
+        table.isScrollEnabled = false
+        table.separatorColor = .meaningBlack
+        table.separatorInset = UIEdgeInsets.init(top: 0, left: 16, bottom: 0, right: 16)
+        
         return table
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .meaningWhite
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -76,7 +82,7 @@ final class SettingViewController: UIViewController {
     }
     
     func setHierachy() {
-        [profileView, tableView].forEach {
+        [profileView, dividerView, tableView].forEach {
             view.addSubview($0)
         }
         
@@ -121,8 +127,14 @@ final class SettingViewController: UIViewController {
             make.centerY.equalToSuperview()
         }
         
-        tableView.snp.makeConstraints { make in
+        dividerView.snp.makeConstraints { make in
             make.top.equalTo(profileView.snp.bottom)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.height.equalTo(0.2)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(dividerView.snp.bottom)
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }

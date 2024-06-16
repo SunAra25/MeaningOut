@@ -9,6 +9,7 @@ import Foundation
 
 class UserDefaultsManager {
     private let userDefaults = UserDefaults.standard
+    private let formatter = DateFormatter()
     
     var nickname: String {
         get {
@@ -47,6 +48,16 @@ class UserDefaultsManager {
         
         set {
             userDefaults.set(newValue, forKey: "likeList")
+        }
+    }
+    
+    var createdAt: String {
+        get {
+            userDefaults.string(forKey: "createdAt") ?? ""
+        }
+        
+        set {
+            userDefaults.set(newValue, forKey: "createdAt")
         }
     }
 }

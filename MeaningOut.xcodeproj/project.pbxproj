@@ -28,6 +28,7 @@
 		C065591E2C1F2BB9000E63B9 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C065591D2C1F2BB9000E63B9 /* CartTableViewCell.swift */; };
 		C06559202C1F2BC5000E63B9 /* DefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C065591F2C1F2BC5000E63B9 /* DefaultTableViewCell.swift */; };
 		C06559222C1F3235000E63B9 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06559212C1F3235000E63B9 /* Setting.swift */; };
+		C06559242C1F358C000E63B9 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06559232C1F358C000E63B9 /* UILabel+.swift */; };
 		C08314382C1D27A00031405E /* ResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08314372C1D279F0031405E /* ResultCollectionViewCell.swift */; };
 		C083143A2C1D5E9A0031405E /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08314392C1D5E9A0031405E /* Product.swift */; };
 		C083143C2C1D7B6D0031405E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C083143B2C1D7B6D0031405E /* DetailViewController.swift */; };
@@ -64,6 +65,7 @@
 		C065591D2C1F2BB9000E63B9 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		C065591F2C1F2BC5000E63B9 /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
 		C06559212C1F3235000E63B9 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		C06559232C1F358C000E63B9 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		C08314372C1D279F0031405E /* ResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		C08314392C1D5E9A0031405E /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		C083143B2C1D7B6D0031405E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				C00A9A0A2C1AFB700072AD75 /* UIColor+.swift */,
 				C00A9A082C1AFAAD0072AD75 /* UIImage+.swift */,
 				C00A9A0C2C1AFDDF0072AD75 /* UIFont+.swift */,
+				C06559232C1F358C000E63B9 /* UILabel+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C034EE842C1C30AC00076357 /* SearchViewController.swift in Sources */,
+				C06559242C1F358C000E63B9 /* UILabel+.swift in Sources */,
 				C034EE8A2C1C545000076357 /* Secrets.swift in Sources */,
 				C083143E2C1D93D10031405E /* MainTabBarController.swift in Sources */,
 				C083143C2C1D7B6D0031405E /* DetailViewController.swift in Sources */,

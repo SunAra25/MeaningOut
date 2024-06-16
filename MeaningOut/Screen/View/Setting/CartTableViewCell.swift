@@ -67,5 +67,6 @@ final class CartTableViewCell: UITableViewCell {
     func configureCell(_ text: String, numOfLike: Int) {
         contentLabel.text = text
         countLabel.text = numOfLike.formatted() + "개의 상품"
+        countLabel.partiallyChanged("의 상품", font: .bodyM, color: .meaningGray1)
     }
 }

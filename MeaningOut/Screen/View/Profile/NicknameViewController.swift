@@ -158,8 +158,17 @@ final class NicknameViewController: UIViewController {
     
     @objc func completedBtnDidTap() {
         guard let nickname = nicknameTextField.text else { return }
+        
         userDefaults.nickname = nickname
         userDefaults.imageNum = random
+        
+        let current = Date()
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy. MM. dd "
+        let createdAt = formatter.string(from: current)
+        
+        userDefaults.createdAt = createdAt
         
         // TODO: 메인화면 전환
     }
