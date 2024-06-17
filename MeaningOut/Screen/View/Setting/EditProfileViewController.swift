@@ -36,7 +36,6 @@ final class EditProfileViewController: UIViewController {
     }()
     private lazy var nicknameTextField: UITextField = {
         let tf = UITextField()
-        tf.text = userDefaults.nickname
         tf.placeholder = userDefaults.nickname
         tf.textColor = .meaningBlack
         tf.textAlignment = .left
@@ -56,11 +55,8 @@ final class EditProfileViewController: UIViewController {
         label.font = .capB
         return label
     }()
-    private lazy var imageNum = userDefaults.imageNum {
-        willSet {
-            profileImageView.changeImage(newValue)
-        }
-    }
+    private lazy var imageNum = userDefaults.imageNum
+    private var nicknameState = NicknameVaild.none
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,14 +124,21 @@ final class EditProfileViewController: UIViewController {
     }
     
     @objc func saveBtnDidTap() {
-        // TODO: 변경사항 저장
+        guard let nickname = nicknameTextField.text else { return }
+        userDefaults.nickname = nickname
+        userDefaults.imageNum = imageNum
+        
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func profileDidTap() {
         let nextVC = ProfileViewController(imageNum: imageNum, title: .profileEdit)
         
-        nextVC.completionHandler = { imageNum in
+        nextVC.completionHandler = { [weak self] imageNum in
+            guard let self else { return }
             self.imageNum = imageNum
+            profileImageView.changeImage(imageNum)
+            navigationItem.rightBarButtonItem?.isEnabled = nicknameState == .valid || nicknameState == .none
         }
         
         navigationController?.pushViewController(nextVC, animated: true)
@@ -143,10 +146,6 @@ final class EditProfileViewController: UIViewController {
 }
 
 extension EditProfileViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.text = ""
-    }
-    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let nick = textField.text else { return }
         
@@ -156,10 +155,9 @@ extension EditProfileViewController: UITextFieldDelegate {
             nickname.removeLast()
         }
         
-        let nicknameValid = checkNicknameValid(nickname)
-        
-        navigationItem.rightBarButtonItem?.isEnabled = nicknameValid == .valid && nickname != userDefaults.nickname
-        messageLabel.text = nicknameValid.rawValue
+        nicknameState = checkNicknameValid(nickname)
+        navigationItem.rightBarButtonItem?.isEnabled = nicknameState == .valid && nickname != userDefaults.nickname
+        messageLabel.text = nicknameState.rawValue
     }
 }
 

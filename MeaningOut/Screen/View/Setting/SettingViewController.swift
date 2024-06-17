@@ -68,6 +68,8 @@ final class SettingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        profileImageView.changeImage(userDefaults.imageNum)
+        nicknameLabel.text = userDefaults.nickname
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
     }
     
