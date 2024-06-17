@@ -157,17 +157,53 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CartTableViewCell.identifier, for: indexPath) as! CartTableViewCell
-            guard let list = userDefaults.likeList else { return cell }
+            let list = userDefaults.likeList
             
+            cell.configureCell(data, numOfLike: list == nil ? 0 : list!.count)
             cell.selectionStyle = .none
-            cell.configureCell(data, numOfLike: list.count)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: DefaultTableViewCell.identifier, for: indexPath) as! DefaultTableViewCell
             
-            cell.selectionStyle = .none
             cell.configureCell(data)
+            cell.selectionStyle = .none
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = Setting.allCases[indexPath.row]
+        
+        switch data {
+        case .withdraw:
+            showWithdrawAlert()
+        default: break
+        }
+    }
+}
+
+extension SettingViewController {
+    func showWithdrawAlert() {
+        let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .destructive) { [weak self] _ in
+            guard let self else { return }
+            
+            userDefaults.resetInfo()
+            
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            let sceneDelegate = windowScene?.delegate as? SceneDelegate
+            
+            let rootViewController = UINavigationController(rootViewController: OnboardingViewController())
+            
+            sceneDelegate?.window?.rootViewController = rootViewController
+            sceneDelegate?.window?.makeKeyAndVisible()
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true)
     }
 }

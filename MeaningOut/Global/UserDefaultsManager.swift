@@ -13,7 +13,7 @@ class UserDefaultsManager {
     
     var nickname: String {
         get {
-            userDefaults.string(forKey: "nickname") ?? "아라"
+            userDefaults.string(forKey: "nickname") ?? ""
         }
         
         set {
@@ -58,6 +58,12 @@ class UserDefaultsManager {
         
         set {
             userDefaults.set(newValue, forKey: "createdAt")
+        }
+    }
+    
+    func resetInfo() {
+        for key in UserDefaults.standard.dictionaryRepresentation().keys {
+            UserDefaults.standard.removeObject(forKey: key.description)
         }
     }
 }

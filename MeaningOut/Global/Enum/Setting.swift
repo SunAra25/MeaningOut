@@ -12,5 +12,5 @@ enum Setting: String, CaseIterable {
     case question = "자주 묻는 질문"
     case inquiry = "1:1 문의"
     case alarm = "알림 설정"
-    case cancel = "탈퇴하기"
+    case withdraw = "탈퇴하기"
 }
