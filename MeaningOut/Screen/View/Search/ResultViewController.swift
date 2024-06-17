@@ -48,7 +48,6 @@ final class ResultViewController: UIViewController {
         collection.prefetchDataSource = self
         
         collection.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.identifier)
-        
         return collection
     }()
     private let flowLayout: UICollectionViewFlowLayout = {
@@ -69,8 +68,12 @@ final class ResultViewController: UIViewController {
     }()
     
     private var searchResult: SearchResponse = SearchResponse(total: 0, start: 0, display: 30, items: []) {
-        didSet {
-            resultCollectionView.reloadData()
+        willSet {
+            if newValue.total == 0 {
+                showAlert()
+            } else {
+                resultCollectionView.reloadData()
+            }
         }
     }
     private lazy var sort: SortBy = .accuracy {
@@ -187,12 +190,27 @@ final class ResultViewController: UIViewController {
                     searchResult = value
                     totalCountLabel.text = value.total.formatted() + "개의 검색 결과"
                     totalCountLabel.layoutIfNeeded()
-                    resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                    if value.total > 0 {
+                        resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                    }
                 }
             case .failure(let error):
                 print(error)
             }
         }
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: "검색 결과가 없습니다", message: nil, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            guard let self else { return }
+            
+            navigationController?.popViewController(animated: true)
+        }
+        
+        alert.addAction(ok)
+        
+        present(alert, animated: true)
     }
     
     @objc func sortButtonDidTap(_ sender: CapsuleButton) {
