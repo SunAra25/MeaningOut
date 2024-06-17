@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C009CAD12C200A8900134660 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C009CAD02C200A8900134660 /* EditProfileViewController.swift */; };
 		C00A9A092C1AFAAD0072AD75 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A9A082C1AFAAD0072AD75 /* UIImage+.swift */; };
 		C00A9A0B2C1AFB700072AD75 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A9A0A2C1AFB700072AD75 /* UIColor+.swift */; };
 		C00A9A0D2C1AFDDF0072AD75 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A9A0C2C1AFDDF0072AD75 /* UIFont+.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C009CAD02C200A8900134660 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		C00A9A082C1AFAAD0072AD75 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		C00A9A0A2C1AFB700072AD75 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		C00A9A0C2C1AFDDF0072AD75 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				C065591B2C1F1646000E63B9 /* SettingViewController.swift */,
 				C065591D2C1F2BB9000E63B9 /* CartTableViewCell.swift */,
 				C065591F2C1F2BC5000E63B9 /* DefaultTableViewCell.swift */,
+				C009CAD02C200A8900134660 /* EditProfileViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				C00A9A162C1B0FEE0072AD75 /* ProfileView.swift in Sources */,
 				C034EE8E2C1C8C6700076357 /* CapsuleButton.swift in Sources */,
 				C08314382C1D27A00031405E /* ResultCollectionViewCell.swift in Sources */,
+				C009CAD12C200A8900134660 /* EditProfileViewController.swift in Sources */,
 				C083143A2C1D5E9A0031405E /* Product.swift in Sources */,
 				C034EE8C2C1C8A6400076357 /* SortBy.swift in Sources */,
 				C065591E2C1F2BB9000E63B9 /* CartTableViewCell.swift in Sources */,

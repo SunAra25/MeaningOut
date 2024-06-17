@@ -11,9 +11,11 @@ import SnapKit
 final class SettingViewController: UIViewController {
     private let userDefaults = UserDefaultsManager()
     
-    private let profileView: UIView = {
+    private lazy var profileView: UIView = {
         let view = UIView()
-        // TODO: 프로필 수정 뷰로 화면전환
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileViewDidTap))
+        view.addGestureRecognizer(tapGesture)
+        view.backgroundColor = .meaningWhite
         return view
     }()
     private lazy var profileImageView: ProfileView = {
@@ -144,6 +146,12 @@ final class SettingViewController: UIViewController {
             make.top.equalTo(dividerView.snp.bottom)
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    @objc func profileViewDidTap() {
+        let nextVC = EditProfileViewController()
+        
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
