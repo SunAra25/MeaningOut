@@ -214,7 +214,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as! ResultCollectionViewCell
         let data = searchResult.items[indexPath.row]
         
-        cell.configureCell(data, isLike: likeList.contains(data.productId))
+        cell.configureCell(data, target: target, isLike: likeList.contains(data.productId))
         cell.likeButton.tag = indexPath.row
         cell.likeButton.addTarget(self, action: #selector(likeBtnDidTap), for: .touchUpInside)
         return cell

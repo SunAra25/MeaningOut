@@ -62,12 +62,13 @@ final class ResultCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(_ data: Product, isLike: Bool) {
+    func configureCell(_ data: Product, target: String, isLike: Bool) {
         let imageURL = URL(string: data.image)
         productImageView.kf.setImage(with: imageURL)
         
         mallNameLabel.text = data.mallName
         productNameLabel.text = data.title
+        productNameLabel.partiallyChanged(target, font: .capB, color: .meaningPrimary)
         
         if data.hprice.isEmpty {
             guard let price = Int(data.lprice) else { return }
