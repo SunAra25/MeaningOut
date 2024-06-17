@@ -84,20 +84,20 @@ final class ProfileViewController: UIViewController {
         completionHandler?(imageNum)
     }
     
-    init(imageNum: Int) {
+    init(imageNum: Int, title: NaviTitle) {
         self.imageNum = imageNum
         
         super.init(nibName: nil, bundle: nil)
         
-        setNavigation()
+        setNavigation(title)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setNavigation() {
-        navigationItem.title = NaviTitle.profileSetting.rawValue
+    func setNavigation(_ title: NaviTitle) {
+        navigationItem.title = title.rawValue
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }

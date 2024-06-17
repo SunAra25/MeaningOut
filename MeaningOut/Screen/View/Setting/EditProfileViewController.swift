@@ -15,6 +15,8 @@ final class EditProfileViewController: UIViewController {
         let view = ProfileView(.user, imageNum: imageNum)
         view.layer.cornerRadius = 50
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileDidTap))
+        view.addGestureRecognizer(tapGesture)
         return view
     }()
     private let cameraView: UIView = {
@@ -54,7 +56,11 @@ final class EditProfileViewController: UIViewController {
         label.font = .capB
         return label
     }()
-    private lazy var imageNum = userDefaults.imageNum
+    private lazy var imageNum = userDefaults.imageNum {
+        willSet {
+            profileImageView.changeImage(newValue)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,6 +129,16 @@ final class EditProfileViewController: UIViewController {
     
     @objc func saveBtnDidTap() {
         // TODO: 변경사항 저장
+    }
+    
+    @objc func profileDidTap() {
+        let nextVC = ProfileViewController(imageNum: imageNum, title: .profileEdit)
+        
+        nextVC.completionHandler = { imageNum in
+            self.imageNum = imageNum
+        }
+        
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 

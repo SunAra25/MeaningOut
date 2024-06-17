@@ -147,7 +147,7 @@ final class NicknameViewController: UIViewController {
     }
     
     @objc func profileDidTap() {
-        let nextVC = ProfileViewController(imageNum: random)
+        let nextVC = ProfileViewController(imageNum: random, title: .profileSetting)
         
         nextVC.completionHandler = { imageNum in
             self.random = imageNum
