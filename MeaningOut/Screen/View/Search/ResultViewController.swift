@@ -275,7 +275,7 @@ extension ResultViewController: UICollectionViewDataSourcePrefetching {
         
         let count = searchResult.items.count
         
-        if count - 4 < indexPaths[0].row {
+        if indexPaths.contains(where: { $0.row == count - 5 }) {
             start += 30
             callRequest(target)
         }

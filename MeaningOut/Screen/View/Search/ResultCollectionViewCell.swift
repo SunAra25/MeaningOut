@@ -17,6 +17,7 @@ final class ResultCollectionViewCell: UICollectionViewCell {
         view.clipsToBounds = true
         view.layer.cornerRadius = 15
         view.contentMode = .scaleAspectFill
+        view.backgroundColor = .meaningGray3?.withAlphaComponent(0.4)
         return view
     }()
     private let mallNameLabel: UILabel = {
