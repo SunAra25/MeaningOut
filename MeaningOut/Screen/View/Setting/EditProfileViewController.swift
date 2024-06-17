@@ -39,6 +39,7 @@ final class EditProfileViewController: UIViewController {
         tf.textColor = .meaningBlack
         tf.textAlignment = .left
         tf.font = .subM
+        tf.delegate = self
         return tf
     }()
     private let underlineView: UIView = {
@@ -122,5 +123,54 @@ final class EditProfileViewController: UIViewController {
     
     @objc func saveBtnDidTap() {
         // TODO: 변경사항 저장
+    }
+}
+
+extension EditProfileViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let nick = textField.text else { return }
+        
+        var nickname = nick
+        
+        if nickname.contains(" ") {
+            nickname.removeLast()
+        }
+        
+        let nicknameValid = checkNicknameValid(nickname)
+        
+        navigationItem.rightBarButtonItem?.isEnabled = nicknameValid == .valid && nickname != userDefaults.nickname
+        messageLabel.text = nicknameValid.rawValue
+    }
+}
+
+extension EditProfileViewController {
+    func checkNicknameValid(_ nickname: String) -> NicknameVaild {
+        if nickname.isEmpty {
+            return .none
+        }
+        
+        for char in nickname {
+            if ["@", "#", "$", "%"].contains(char) {
+                return .symbol
+            }
+            
+            if char.isNumber {
+                return .number
+            }
+            
+            if char == " " {
+                return .gap
+            }
+        }
+        
+        if !(2...9 ~= nickname.count) {
+            return .range
+        }
+        
+        return .valid
     }
 }
