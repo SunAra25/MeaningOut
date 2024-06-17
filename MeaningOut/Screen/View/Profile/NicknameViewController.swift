@@ -170,7 +170,13 @@ final class NicknameViewController: UIViewController {
         
         userDefaults.createdAt = createdAt
         
-        // TODO: 메인화면 전환
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        
+        let rootViewController = MainTabBarController()
+        
+        sceneDelegate?.window?.rootViewController = rootViewController
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
 }
 
