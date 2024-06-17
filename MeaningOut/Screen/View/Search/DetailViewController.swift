@@ -16,7 +16,13 @@ final class DetailViewController: UIViewController {
             let request = URLRequest(url: url)
             view.load(request)
         }
+        view.navigationDelegate = self
         return view
+    }()
+    private let indicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        return indicator
     }()
     private let urlLink: URL?
     private var isLike: Bool {
@@ -66,8 +72,13 @@ final class DetailViewController: UIViewController {
     
     func setLayout() {
         view.addSubview(webView)
+        view.addSubview(indicatorView)
         
         webView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        indicatorView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
@@ -75,5 +86,15 @@ final class DetailViewController: UIViewController {
     @objc func likeBtnDidTap() {
         isLike.toggle()
         completionHandler?(isLike)
+    }
+}
+
+extension DetailViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        indicatorView.startAnimating()
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        indicatorView.stopAnimating()
     }
 }
