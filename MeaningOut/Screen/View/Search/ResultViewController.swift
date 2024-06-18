@@ -70,7 +70,7 @@ final class ResultViewController: UIViewController {
     private var searchResult: SearchResponse = SearchResponse(total: 0, start: 0, display: 30, items: []) {
         willSet {
             if newValue.total == 0 {
-                showAlert()
+                showNoneResultAlert()
             } else {
                 resultCollectionView.reloadData()
             }
@@ -194,14 +194,27 @@ final class ResultViewController: UIViewController {
                         resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                     }
                 }
-            case .failure(let error):
-                print(error)
+            case .failure(_):
+                showFailedNetworkAlert()
             }
         }
     }
     
-    func showAlert() {
+    func showNoneResultAlert() {
         let alert = UIAlertController(title: "검색 결과가 없습니다", message: nil, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            guard let self else { return }
+            
+            navigationController?.popViewController(animated: true)
+        }
+        
+        alert.addAction(ok)
+        
+        present(alert, animated: true)
+    }
+    
+    func showFailedNetworkAlert() {
+        let alert = UIAlertController(title: "데이터를 읽어오는 데 실패했습니다.", message: "잠시 후 다시 시도해주세요.", preferredStyle: .alert)
         let ok = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             guard let self else { return }
             
