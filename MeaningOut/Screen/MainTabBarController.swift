@@ -17,7 +17,7 @@ class MainTabBarController: UITabBarController {
     func setUI() {
         tabBar.backgroundColor = .white
         UITabBar.appearance().tintColor = .meaningPrimary
-        UITabBar.appearance().unselectedItemTintColor = .meaningBlack
+        UITabBar.appearance().unselectedItemTintColor = .meaningGray2
         
         let searchViewContrller = UINavigationController(rootViewController: SearchViewController())
         let settingViewController = UINavigationController(rootViewController: SettingViewController())
