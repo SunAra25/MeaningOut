@@ -42,7 +42,7 @@ final class CartTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setLayout() {
+    private func setLayout() {
         [contentLabel, basketImageView, countLabel].forEach {
             contentView.addSubview($0)
         }

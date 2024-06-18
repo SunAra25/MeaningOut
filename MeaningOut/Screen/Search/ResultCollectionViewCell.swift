@@ -86,7 +86,7 @@ final class ResultCollectionViewCell: UICollectionViewCell {
         likeButton.configuration = config
     }
     
-    func setLayout() {
+    private func setLayout() {
         [productImageView, mallNameLabel, productNameLabel, priceLabel, likeButton].forEach {
             contentView.addSubview($0)
         }

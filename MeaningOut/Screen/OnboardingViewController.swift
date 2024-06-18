@@ -51,7 +51,7 @@ final class OnboardingViewController: UIViewController {
         setConstraints()
     }
     
-    func setNavigation() {
+    private func setNavigation() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }

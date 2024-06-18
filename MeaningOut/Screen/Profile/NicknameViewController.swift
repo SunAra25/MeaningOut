@@ -92,13 +92,13 @@ final class NicknameViewController: UIViewController {
         setConstraints()
     }
     
-    func setNavigation() {
+    private func setNavigation() {
         navigationItem.title = NaviTitle.profileSetting.rawValue
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
     
-    func setHierachy() {
+    private func setHierachy() {
         [profileImageView, cameraView, nicknameTextField, underlineView, messageLabel, completedButton].forEach {
             view.addSubview($0)
         }
@@ -106,7 +106,7 @@ final class NicknameViewController: UIViewController {
         cameraView.addSubview(cameraImageView)
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         profileImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide).inset(32)
@@ -147,7 +147,7 @@ final class NicknameViewController: UIViewController {
         }
     }
     
-    @objc func profileDidTap() {
+    @objc private func profileDidTap() {
         let nextVC = ProfileViewController(imageNum: random, title: .profileSetting)
         
         nextVC.completionHandler = { imageNum in
@@ -157,7 +157,7 @@ final class NicknameViewController: UIViewController {
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    @objc func completedBtnDidTap() {
+    @objc private func completedBtnDidTap() {
         guard let nickname = nicknameTextField.text else { return }
         
         userDefaults.nickname = nickname

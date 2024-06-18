@@ -69,7 +69,7 @@ final class EditProfileViewController: UIViewController {
         setConstraints()
     }
     
-    func setNavigation() {
+    private func setNavigation() {
         navigationItem.title = NaviTitle.profileEdit.rawValue
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .meaningBlack
@@ -81,7 +81,7 @@ final class EditProfileViewController: UIViewController {
         navigationItem.rightBarButtonItem = barButtonItem
     }
     
-    func setHierachy() {
+    private func setHierachy() {
         [profileImageView, cameraView, nicknameTextField, underlineView, messageLabel].forEach {
             view.addSubview($0)
         }
@@ -89,7 +89,7 @@ final class EditProfileViewController: UIViewController {
         cameraView.addSubview(cameraImageView)
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         profileImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide).inset(32)

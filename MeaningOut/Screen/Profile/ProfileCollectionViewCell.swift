@@ -28,7 +28,7 @@ final class ProfileCollectionViewCell: UICollectionViewCell {
         profileView.layer.cornerRadius = radius
     }
     
-    func setLayout() {
+    private func setLayout() {
         contentView.addSubview(profileView)
         
         profileView.snp.makeConstraints { make in

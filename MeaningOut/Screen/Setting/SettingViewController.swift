@@ -86,13 +86,13 @@ final class SettingViewController: UIViewController {
         setConstraints()
     }
 
-    func setNavigation() {
+    private func setNavigation() {
         navigationItem.title = NaviTitle.setting.rawValue
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
     
-    func setHierachy() {
+    private func setHierachy() {
         [profileView, dividerView, tableView].forEach {
             view.addSubview($0)
         }
@@ -106,7 +106,7 @@ final class SettingViewController: UIViewController {
         }
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         profileView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(120)
@@ -193,7 +193,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SettingViewController {
-    func showWithdrawAlert() {
+    private func showWithdrawAlert() {
         let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?", preferredStyle: .alert)
         let ok = UIAlertAction(title: "확인", style: .destructive) { [weak self] _ in
             guard let self else { return }

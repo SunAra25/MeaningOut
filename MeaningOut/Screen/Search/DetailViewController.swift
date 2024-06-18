@@ -53,7 +53,7 @@ final class DetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setNavigation(_ title: String) {
+    private func setNavigation(_ title: String) {
         navigationItem.title = title
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
@@ -66,11 +66,7 @@ final class DetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = barButtonItem
     }
     
-    func setLikeButton() {
-        
-    }
-    
-    func setLayout() {
+    private func setLayout() {
         view.addSubview(webView)
         view.addSubview(indicatorView)
         
@@ -83,7 +79,7 @@ final class DetailViewController: UIViewController {
         }
     }
     
-    @objc func likeBtnDidTap() {
+    @objc private func likeBtnDidTap() {
         isLike.toggle()
         completionHandler?(isLike)
     }

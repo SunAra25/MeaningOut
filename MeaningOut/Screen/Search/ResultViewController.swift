@@ -124,13 +124,13 @@ final class ResultViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setNavigation() {
+    private func setNavigation() {
         navigationItem.title = target
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
     
-    func setHierachy() {
+    private func setHierachy() {
         [totalCountLabel, stackView, resultCollectionView].forEach {
             view.addSubview($0)
         }
@@ -140,7 +140,7 @@ final class ResultViewController: UIViewController {
         }
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         totalCountLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
@@ -163,7 +163,7 @@ final class ResultViewController: UIViewController {
         }
     }
     
-    func callRequest(_ target: String) {
+    private func callRequest(_ target: String) {
         let url = APIURL.searchURL
         let parameters: Parameters = [
             "query" : target,
@@ -200,7 +200,7 @@ final class ResultViewController: UIViewController {
         }
     }
     
-    func showNoneResultAlert() {
+    private func showNoneResultAlert() {
         let alert = UIAlertController(title: "검색 결과가 없습니다", message: nil, preferredStyle: .alert)
         let ok = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             guard let self else { return }
@@ -213,7 +213,7 @@ final class ResultViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    func showFailedNetworkAlert() {
+    private func showFailedNetworkAlert() {
         let alert = UIAlertController(title: "데이터를 읽어오는 데 실패했습니다.", message: "잠시 후 다시 시도해주세요.", preferredStyle: .alert)
         let ok = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             guard let self else { return }
@@ -226,7 +226,7 @@ final class ResultViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    @objc func sortButtonDidTap(_ sender: CapsuleButton) {
+    @objc private func sortButtonDidTap(_ sender: CapsuleButton) {
         sortButtons.forEach {
             guard let button = $0 as? CapsuleButton else { return }
             button.isSelect = button == sender
@@ -269,7 +269,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    @objc func likeBtnDidTap(sender: UIButton) {
+    @objc private func likeBtnDidTap(sender: UIButton) {
         let productId = searchResult.items[sender.tag].productId
         let isContains = likeList.contains(productId)
         

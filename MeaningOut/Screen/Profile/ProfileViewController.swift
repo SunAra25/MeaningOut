@@ -96,13 +96,13 @@ final class ProfileViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setNavigation(_ title: NaviTitle) {
+    private func setNavigation(_ title: NaviTitle) {
         navigationItem.title = title.rawValue
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
 
-    func setLayout() {
+    private func setLayout() {
         [profileView, cameraView, collectionView].forEach {
             view.addSubview($0)
         }

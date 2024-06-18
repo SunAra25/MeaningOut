@@ -29,7 +29,7 @@ final class DefaultTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setLayout() {
+    private func setLayout() {
         contentView.addSubview(contentLabel)
         
         contentLabel.snp.makeConstraints { make in

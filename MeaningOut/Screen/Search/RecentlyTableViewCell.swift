@@ -47,7 +47,7 @@ final class RecentlyTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setLayout(){
+    private func setLayout(){
         [clockImageView, searchLabel, deleteButton].forEach {
             contentView.addSubview($0)
         }

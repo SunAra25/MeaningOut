@@ -96,14 +96,14 @@ final class SearchViewController: UIViewController {
         setConstraints()
     }
     
-    func setDelegate() {
+    private func setDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
         
         searchBar.delegate = self
     }
     
-    func setUI() {
+    private func setUI() {
         guard let recentlyList = userDefaults.recentlySearch else {
             emptyView.isHidden = false
             searchView.isHidden = true
@@ -116,7 +116,7 @@ final class SearchViewController: UIViewController {
         self.recentlyList = recentlyList
     }
     
-    func setNavigation() {
+    private func setNavigation() {
         let nickname = userDefaults.nickname
         
         navigationItem.title = nickname + NaviTitle.search.rawValue
@@ -124,7 +124,7 @@ final class SearchViewController: UIViewController {
         navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
     
-    func setHierachy() {
+    private func setHierachy() {
         [searchBar, emptyView, searchView].forEach {
             view.addSubview($0)
         }
@@ -138,7 +138,7 @@ final class SearchViewController: UIViewController {
         }
     }
 
-    func setConstraints() {
+    private func setConstraints() {
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(16)
@@ -181,7 +181,7 @@ final class SearchViewController: UIViewController {
         }
     }
     
-    @objc func deleteAllBtnDidTap() {
+    @objc private func deleteAllBtnDidTap() {
         recentlyList.removeAll()
     }
 }
