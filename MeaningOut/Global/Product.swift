@@ -17,4 +17,8 @@ struct Product: Codable {
     let link: String
     let image: String
     let lprice, hprice, mallName, productId: String
+    
+    var titleNoneHTML: String {
+        title.htmlEscaped
+    }
 }

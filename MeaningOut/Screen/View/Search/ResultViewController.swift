@@ -254,7 +254,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let data = searchResult.items[indexPath.row]
         let isContains = likeList.contains(data.productId)
-        let nextVC = DetailViewController(productName: data.title, link: data.link, isLike: isContains)
+        let nextVC = DetailViewController(productName: data.titleNoneHTML, link: data.link, isLike: isContains)
         
         nextVC.completionHandler = { [weak self] isLike in
             guard let self else { return }

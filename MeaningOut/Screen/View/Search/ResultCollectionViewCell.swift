@@ -68,7 +68,7 @@ final class ResultCollectionViewCell: UICollectionViewCell {
         productImageView.kf.setImage(with: imageURL)
         
         mallNameLabel.text = data.mallName
-        productNameLabel.text = data.title
+        productNameLabel.text = data.titleNoneHTML
         productNameLabel.partiallyChanged(target, font: .capB, color: .meaningPrimary)
         
         if data.hprice.isEmpty {
