@@ -113,21 +113,13 @@
 		C00A9A0F2C1B09900072AD75 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				C00A9A102C1B0A070072AD75 /* View */,
+				C065591A2C1F1620000E63B9 /* Setting */,
+				C00A9A112C1B0A3D0072AD75 /* Profile */,
+				C034EE822C1C309A00076357 /* Search */,
 				C0ED78962C1AF5720041885F /* OnboardingViewController.swift */,
 				C083143D2C1D93D10031405E /* MainTabBarController.swift */,
 			);
 			path = Screen;
-			sourceTree = "<group>";
-		};
-		C00A9A102C1B0A070072AD75 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C065591A2C1F1620000E63B9 /* Setting */,
-				C034EE822C1C309A00076357 /* Search */,
-				C00A9A112C1B0A3D0072AD75 /* Profile */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		C00A9A112C1B0A3D0072AD75 /* Profile */ = {
