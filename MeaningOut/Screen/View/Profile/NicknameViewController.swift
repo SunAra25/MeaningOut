@@ -191,38 +191,10 @@ extension NicknameViewController: UITextFieldDelegate {
             nickname.removeLast()
         }
         
-        let nicknameValid = checkNicknameValid(nickname)
+        let nicknameValid = NicknameState.checkNickname(nickname)
         
         completedButton.isEnabled = nicknameValid == .valid
         completedButton.backgroundColor = nicknameValid == .valid ? .meaningPrimary : .meaningGray3
         messageLabel.text = nicknameValid.rawValue
-    }
-}
-
-extension NicknameViewController {
-    func checkNicknameValid(_ nickname: String) -> NicknameVaild {
-        if nickname.isEmpty {
-            return .none
-        }
-        
-        for char in nickname {
-            if ["@", "#", "$", "%"].contains(char) {
-                return .symbol
-            }
-            
-            if char.isNumber {
-                return .number
-            }
-            
-            if char == " " {
-                return .gap
-            }
-        }
-        
-        if !(2...9 ~= nickname.count) {
-            return .range
-        }
-        
-        return .valid
     }
 }

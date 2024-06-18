@@ -57,7 +57,7 @@ final class EditProfileViewController: UIViewController {
         return label
     }()
     private lazy var imageNum = userDefaults.imageNum
-    private var nicknameState = NicknameVaild.none
+    private var nicknameState = NicknameState.none
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,36 +156,8 @@ extension EditProfileViewController: UITextFieldDelegate {
             nickname.removeLast()
         }
         
-        nicknameState = checkNicknameValid(nickname)
+        nicknameState = NicknameState.checkNickname(nickname)
         navigationItem.rightBarButtonItem?.isEnabled = nicknameState == .valid && nickname != userDefaults.nickname
         messageLabel.text = nicknameState.rawValue
-    }
-}
-
-extension EditProfileViewController {
-    func checkNicknameValid(_ nickname: String) -> NicknameVaild {
-        if nickname.isEmpty {
-            return .none
-        }
-        
-        for char in nickname {
-            if ["@", "#", "$", "%"].contains(char) {
-                return .symbol
-            }
-            
-            if char.isNumber {
-                return .number
-            }
-            
-            if char == " " {
-                return .gap
-            }
-        }
-        
-        if !(2...9 ~= nickname.count) {
-            return .range
-        }
-        
-        return .valid
     }
 }
