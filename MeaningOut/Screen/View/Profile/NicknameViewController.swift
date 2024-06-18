@@ -41,6 +41,7 @@ final class NicknameViewController: UIViewController {
         tf.textColor = .meaningBlack
         tf.textAlignment = .left
         tf.font = .subM
+        tf.tintColor = .meaningBlack
         return tf
     }()
     private let underlineView: UIView = {

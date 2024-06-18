@@ -40,6 +40,7 @@ final class EditProfileViewController: UIViewController {
         tf.textColor = .meaningBlack
         tf.textAlignment = .left
         tf.font = .subM
+        tf.tintColor = .meaningBlack
         tf.delegate = self
         return tf
     }()
