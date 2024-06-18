@@ -21,4 +21,13 @@ struct Product: Codable {
     var titleNoneHTML: String {
         title.htmlEscaped
     }
+    
+    var price: String {
+        guard let low = Int(lprice) else { return "" }
+        let price = low.formatted()
+        
+        guard let high = Int(hprice) else { return price + "원" }
+        
+        return price + "~" + high.formatted() + "원"
+    }
 }

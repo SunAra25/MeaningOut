@@ -71,14 +71,7 @@ final class ResultCollectionViewCell: UICollectionViewCell {
         productNameLabel.text = data.titleNoneHTML
         productNameLabel.partiallyChanged(target, font: .capB, color: .meaningPrimary)
         
-        if data.hprice.isEmpty {
-            guard let price = Int(data.lprice) else { return }
-            priceLabel.text = price.formatted() + "원"
-        } else {
-            guard let low = Int(data.lprice), let hight = Int(data.hprice) else { return }
-            
-            priceLabel.text = low.formatted() + "~" + hight.formatted() + "원"
-        }
+        priceLabel.text = data.price
         
         var config = likeButton.configuration ?? UIButton.Configuration.filled()
         config.image = isLike ? .likeSelected : .likeUnselected
