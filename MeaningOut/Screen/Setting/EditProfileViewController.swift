@@ -36,6 +36,7 @@ final class EditProfileViewController: UIViewController {
     }()
     private lazy var nicknameTextField: UITextField = {
         let tf = UITextField()
+        tf.text = userDefaults.nickname
         tf.placeholder = userDefaults.nickname
         tf.textColor = .meaningBlack
         tf.textAlignment = .left
@@ -58,6 +59,13 @@ final class EditProfileViewController: UIViewController {
     }()
     private lazy var imageNum = userDefaults.imageNum
     private var nicknameState = NicknameState.none
+    private lazy var currentName = userDefaults.nickname
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        nicknameTextField.text = currentName
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,6 +141,11 @@ final class EditProfileViewController: UIViewController {
     }
     
     @objc func profileDidTap() {
+        guard let nickname = nicknameTextField.text else { return }
+        
+        currentName = nickname
+        view.endEditing(true)
+        
         let nextVC = ProfileViewController(imageNum: imageNum, title: .profileEdit)
         
         nextVC.completionHandler = { [weak self] imageNum in
@@ -147,6 +160,10 @@ final class EditProfileViewController: UIViewController {
 }
 
 extension EditProfileViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        nicknameTextField.text = nil
+    }
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let nick = textField.text else { return }
         
