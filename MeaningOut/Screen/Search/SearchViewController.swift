@@ -13,6 +13,7 @@ final class SearchViewController: UIViewController {
     
     private let searchBar: UISearchBar = {
         let bar = UISearchBar()
+        bar.tintColor = .meaningBlack
         bar.returnKeyType = .search
         bar.autocorrectionType = .no
         bar.spellCheckingType = .no
@@ -91,7 +92,7 @@ final class SearchViewController: UIViewController {
         
         setNavigation()
         setDelegate()
-        
+        setupKeyboardEvent()
         setHierachy()
         setConstraints()
     }
@@ -204,6 +205,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        view.endEditing(true)
+        
         let target = recentlyList[indexPath.row]
         recentlyList.remove(at: indexPath.row)
         recentlyList.insert(target, at: 0)
@@ -234,5 +237,43 @@ extension SearchViewController: UISearchBarDelegate {
         let nextVC = ResultViewController(searchTarget: target)
         
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+}
+
+extension SearchViewController {
+    func setupKeyboardEvent() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        guard let userInfo = sender.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        
+        let keyboardHeight = keyboardFrame.height - view.safeAreaInsets.bottom
+        
+        tableView.snp.updateConstraints { make in
+            make.bottom.equalToSuperview().inset(keyboardHeight)
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func keyboardWillHide(_ sender: Notification) {
+        tableView.snp.updateConstraints { make in
+            make.bottom.equalToSuperview()
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
 }
