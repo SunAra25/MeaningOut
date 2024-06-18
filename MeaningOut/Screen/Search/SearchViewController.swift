@@ -241,7 +241,7 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 extension SearchViewController {
-    func setupKeyboardEvent() {
+    private func setupKeyboardEvent() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
                                                name: UIResponder.keyboardWillShowNotification,
@@ -252,7 +252,7 @@ extension SearchViewController {
                                                object: nil)
     }
     
-    @objc func keyboardWillShow(_ sender: Notification) {
+    @objc private func keyboardWillShow(_ sender: Notification) {
         guard let userInfo = sender.userInfo,
               let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
         
@@ -267,7 +267,7 @@ extension SearchViewController {
         }
     }
     
-    @objc func keyboardWillHide(_ sender: Notification) {
+    @objc private func keyboardWillHide(_ sender: Notification) {
         tableView.snp.updateConstraints { make in
             make.bottom.equalToSuperview()
         }

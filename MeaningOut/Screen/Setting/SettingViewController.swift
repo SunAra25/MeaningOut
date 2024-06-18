@@ -150,7 +150,7 @@ final class SettingViewController: UIViewController {
         }
     }
     
-    @objc func profileViewDidTap() {
+    @objc private func profileViewDidTap() {
         let nextVC = EditProfileViewController()
         
         navigationController?.pushViewController(nextVC, animated: true)

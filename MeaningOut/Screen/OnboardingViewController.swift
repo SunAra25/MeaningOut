@@ -79,7 +79,7 @@ final class OnboardingViewController: UIViewController {
         }
     }
     
-    @objc func startButtonDidTap() {
+    @objc private func startButtonDidTap() {
         let nextVC = NicknameViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }

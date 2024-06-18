@@ -45,7 +45,7 @@ final class ProfileView: UIView {
         profileImageView.image = UIImage(named: "profile_\(imageNum)")
     }
     
-    func setLayout() {
+    private func setLayout() {
         addSubview(profileImageView)
         
         profileImageView.snp.makeConstraints { make in
