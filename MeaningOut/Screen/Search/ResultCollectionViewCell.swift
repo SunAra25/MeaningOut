@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Kingfisher
 
 final class ResultCollectionViewCell: UICollectionViewCell {
     static let identifier = "ResultCollectionViewCell"
@@ -64,8 +63,20 @@ final class ResultCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(_ data: Product, target: String, isLike: Bool) {
-        let imageURL = URL(string: data.image)
-        productImageView.kf.setImage(with: imageURL)
+        guard let imageURL = URL(string: data.image) else { return }
+        
+        DispatchQueue.global().async { [weak self] in
+            guard let self else { return }
+            do {
+                let data = try Data(contentsOf: imageURL)
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    productImageView.image = UIImage(data: data)
+                }
+            } catch {
+                productImageView.backgroundColor = .lightGray
+            }
+        }
         
         mallNameLabel.text = data.mallName
         productNameLabel.text = data.titleNoneHTML
