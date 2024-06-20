@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 import SnapKit
 
 final class ResultViewController: UIViewController {
@@ -79,7 +78,7 @@ final class ResultViewController: UIViewController {
     private lazy var sort: SortBy = .accuracy {
         didSet {
             start = 1
-            callRequest(target)
+            requestSearchResult(target)
         }
     }
     private var likeList: [String] {
@@ -117,7 +116,7 @@ final class ResultViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         
-        callRequest(target)
+        requestSearchResult(target)
     }
     
     required init?(coder: NSCoder) {
@@ -163,39 +162,23 @@ final class ResultViewController: UIViewController {
         }
     }
     
-    private func callRequest(_ target: String) {
-        let url = APIURL.searchURL
-        let parameters: Parameters = [
-            "query" : target,
-            "display" : 30,
-            "start" : start,
-            "sort" : sort.value
-        ]
-        let headers: HTTPHeaders = [
-            Header.id : APIKey.clientId,
-            Header.secret : APIKey.clientSecret
-        ]
-        
-        AF.request(
-            url,
-            parameters: parameters,
-            headers: headers
-        ).responseDecodable(of: SearchResponse.self) { [weak self] response in
+    private func requestSearchResult(_ target: String) {
+        Network.getSearchResult(target, start: start, sort: sort) { [weak self] result in
             guard let self else { return }
-            switch response.result {
-            case .success(let value):
+            switch result {
+            case .success(let response):
                 if start > 1 {
-                    searchResult.items += value.items
+                    searchResult.items += response.items
                 } else {
-                    searchResult = value
-                    totalCountLabel.text = value.total.formatted() + "개의 검색 결과"
+                    searchResult = response
+                    totalCountLabel.text = response.total.formatted() + "개의 검색 결과"
                     totalCountLabel.layoutIfNeeded()
-                    if value.total > 0 {
+                    if response.total > 0 {
                         resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                     }
                 }
-            case .failure(_):
-                showFailedNetworkAlert()
+            case .failure(let error):
+                print(error)
             }
         }
     }
@@ -290,7 +273,7 @@ extension ResultViewController: UICollectionViewDataSourcePrefetching {
         
         if indexPaths.contains(where: { $0.row == count - 5 }) {
             start += 30
-            callRequest(target)
+            requestSearchResult(target)
         }
     }
 }
