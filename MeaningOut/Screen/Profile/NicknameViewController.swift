@@ -191,10 +191,17 @@ extension NicknameViewController: UITextFieldDelegate {
             nickname.removeLast()
         }
         
-        let nicknameValid = NicknameState.checkNickname(nickname)
-        
-        completedButton.isEnabled = nicknameValid == .valid
-        completedButton.backgroundColor = nicknameValid == .valid ? .meaningPrimary : .meaningGray3
-        messageLabel.text = nicknameValid.rawValue
+        do {
+            let isValid = try NicknameError.checkNickname(nickname)
+            messageLabel.text = isValid ? "사용가능한 닉네임입니다." : ""
+            completedButton.isEnabled = isValid
+            completedButton.backgroundColor = isValid ? .meaningPrimary : .meaningGray3
+        } catch let error as NicknameError {
+            completedButton.isEnabled = false
+            completedButton.backgroundColor = .meaningGray3
+            messageLabel.text = error.errorDescription
+        } catch {
+            print("error")
+        }
     }
 }

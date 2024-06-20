@@ -58,7 +58,7 @@ final class EditProfileViewController: UIViewController {
         return label
     }()
     private lazy var imageNum = userDefaults.imageNum
-    private var nicknameState = NicknameState.none
+    private var isNicknameValid = false
     private lazy var currentName = userDefaults.nickname
     
     override func viewWillAppear(_ animated: Bool) {
@@ -152,7 +152,7 @@ final class EditProfileViewController: UIViewController {
             guard let self else { return }
             self.imageNum = imageNum
             profileImageView.changeImage(imageNum)
-            navigationItem.rightBarButtonItem?.isEnabled = nicknameState == .valid || nicknameState == .none
+            navigationItem.rightBarButtonItem?.isEnabled = isNicknameValid
         }
         
         navigationController?.pushViewController(nextVC, animated: true)
@@ -173,8 +173,17 @@ extension EditProfileViewController: UITextFieldDelegate {
             nickname.removeLast()
         }
         
-        nicknameState = NicknameState.checkNickname(nickname)
-        navigationItem.rightBarButtonItem?.isEnabled = nicknameState == .valid && nickname != userDefaults.nickname
-        messageLabel.text = nicknameState.rawValue
+        do {
+            let isValid = try NicknameError.checkNickname(nickname)
+            messageLabel.text = isValid ? "사용가능한 닉네임입니다." : ""
+            navigationItem.rightBarButtonItem?.isEnabled = isValid
+            isNicknameValid = isValid
+        } catch let error as NicknameError {
+            messageLabel.text = error.errorDescription
+            navigationItem.rightBarButtonItem?.isEnabled = false
+            isNicknameValid = false
+        } catch {
+            print("error")
+        }
     }
 }
