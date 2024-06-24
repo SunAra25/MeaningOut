@@ -69,7 +69,10 @@ final class ResultViewController: UIViewController {
     private var searchResult: SearchResponse = SearchResponse(total: 0, start: 0, display: 30, items: []) {
         willSet {
             if newValue.total == 0 {
-                showNoneResultAlert()
+                showOneBtnAlert(title: "검색 결과가 없습니다") { [weak self] in
+                    guard let self else { return }
+                    navigationController?.popViewController(animated: true)
+                }
             } else {
                 resultCollectionView.reloadData()
             }
@@ -178,35 +181,12 @@ final class ResultViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                print(error)
+                showOneBtnAlert(title: "데이터를 읽어오는 데 실패했습니다.", message: "잠시 후 다시 시도해주세요.") { [weak self] in
+                    guard let self else { return }
+                    navigationController?.popViewController(animated: true)
+                }
             }
         }
-    }
-    
-    private func showNoneResultAlert() {
-        let alert = UIAlertController(title: "검색 결과가 없습니다", message: nil, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
-            guard let self else { return }
-            
-            navigationController?.popViewController(animated: true)
-        }
-        
-        alert.addAction(ok)
-        
-        present(alert, animated: true)
-    }
-    
-    private func showFailedNetworkAlert() {
-        let alert = UIAlertController(title: "데이터를 읽어오는 데 실패했습니다.", message: "잠시 후 다시 시도해주세요.", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
-            guard let self else { return }
-            
-            navigationController?.popViewController(animated: true)
-        }
-        
-        alert.addAction(ok)
-        
-        present(alert, animated: true)
     }
     
     @objc private func sortButtonDidTap(_ sender: CapsuleButton) {

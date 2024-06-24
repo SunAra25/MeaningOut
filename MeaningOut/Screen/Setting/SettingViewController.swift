@@ -186,34 +186,19 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch data {
         case .withdraw:
-            showWithdrawAlert()
+            showTwoBtnAlert(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?") { [weak self] in
+                guard let self else { return }
+                userDefaults.resetInfo()
+                
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                let sceneDelegate = windowScene?.delegate as? SceneDelegate
+                
+                let rootViewController = UINavigationController(rootViewController: OnboardingViewController())
+                
+                sceneDelegate?.window?.rootViewController = rootViewController
+                sceneDelegate?.window?.makeKeyAndVisible()
+            }
         default: break
         }
-    }
-}
-
-extension SettingViewController {
-    private func showWithdrawAlert() {
-        let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "확인", style: .destructive) { [weak self] _ in
-            guard let self else { return }
-            
-            userDefaults.resetInfo()
-            
-            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-            let sceneDelegate = windowScene?.delegate as? SceneDelegate
-            
-            let rootViewController = UINavigationController(rootViewController: OnboardingViewController())
-            
-            sceneDelegate?.window?.rootViewController = rootViewController
-            sceneDelegate?.window?.makeKeyAndVisible()
-        }
-        
-        let cancel = UIAlertAction(title: "취소", style: .cancel)
-        
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        
-        present(alert, animated: true)
     }
 }
