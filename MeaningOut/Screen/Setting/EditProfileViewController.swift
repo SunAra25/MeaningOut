@@ -12,7 +12,7 @@ final class EditProfileViewController: BaseViewController {
     let userDefaults = UserDefaultsManager()
     
     private lazy var profileImageView: ProfileView = {
-        let view = ProfileView(.user, imageNum: imageNum)
+        let view = ProfileView(.user, imageNum: initImgNum)
         view.layer.cornerRadius = 50
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileDidTap))
@@ -57,7 +57,8 @@ final class EditProfileViewController: BaseViewController {
         label.font = .capB
         return label
     }()
-    private lazy var imageNum = userDefaults.imageNum
+    private lazy var initImgNum = userDefaults.imageNum
+    private lazy var currentImgNum = initImgNum
     private var isNicknameValid = false
     private lazy var currentName = userDefaults.nickname
     
@@ -124,7 +125,7 @@ final class EditProfileViewController: BaseViewController {
     @objc func saveBtnDidTap() {
         guard let nickname = nicknameTextField.text else { return }
         userDefaults.nickname = nickname
-        userDefaults.imageNum = imageNum
+        userDefaults.imageNum = currentImgNum
         
         navigationController?.popViewController(animated: true)
     }
@@ -135,13 +136,13 @@ final class EditProfileViewController: BaseViewController {
         currentName = nickname
         view.endEditing(true)
         
-        let nextVC = ProfileViewController(imageNum: imageNum, title: .profileEdit)
+        let nextVC = ProfileViewController(imageNum: currentImgNum, title: .profileEdit)
         
         nextVC.completionHandler = { [weak self] imageNum in
             guard let self else { return }
-            self.imageNum = imageNum
+            navigationItem.rightBarButtonItem?.isEnabled = initImgNum != imageNum || isNicknameValid
+            currentImgNum = imageNum
             profileImageView.changeImage(imageNum)
-            navigationItem.rightBarButtonItem?.isEnabled = isNicknameValid
         }
         
         navigationController?.pushViewController(nextVC, animated: true)
