@@ -116,13 +116,13 @@ final class ResultViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setNavigation() {
+    override func setNavigation() {
         navigationItem.title = target
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
     
-    private func setHierachy() {
+    override func setHierachy() {
         [totalCountLabel, stackView, resultCollectionView].forEach {
             view.addSubview($0)
         }
@@ -132,7 +132,7 @@ final class ResultViewController: BaseViewController {
         }
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         totalCountLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
@@ -170,7 +170,7 @@ final class ResultViewController: BaseViewController {
                         resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                     }
                 }
-            case .failure(let error):
+            case .failure(_):
                 showOneBtnAlert(title: "데이터를 읽어오는 데 실패했습니다.", message: "잠시 후 다시 시도해주세요.") { [weak self] in
                     guard let self else { return }
                     navigationController?.popViewController(animated: true)

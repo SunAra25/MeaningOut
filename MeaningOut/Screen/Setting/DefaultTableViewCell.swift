@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class DefaultTableViewCell: UITableViewCell {
+final class DefaultTableViewCell: BaseTableViewCell {
     static let identifier = "DefaultTableViewCell"
     
     private let contentLabel: UILabel = {
@@ -19,17 +19,7 @@ final class DefaultTableViewCell: UITableViewCell {
         return label
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setLayout() {
+    override func setLayout() {
         contentView.addSubview(contentLabel)
         
         contentLabel.snp.makeConstraints { make in

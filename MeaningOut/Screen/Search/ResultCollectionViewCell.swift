@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ResultCollectionViewCell: UICollectionViewCell {
+final class ResultCollectionViewCell: BaseCollectionViewCell {
     static let identifier = "ResultCollectionViewCell"
     
     private let productImageView: UIImageView = {
@@ -52,45 +52,7 @@ final class ResultCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureCell(_ data: Product, target: String, isLike: Bool) {
-        guard let imageURL = URL(string: data.image) else { return }
-        
-        DispatchQueue.global().async { [weak self] in
-            guard let self else { return }
-            do {
-                let data = try Data(contentsOf: imageURL)
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    productImageView.image = UIImage(data: data)
-                }
-            } catch {
-                productImageView.backgroundColor = .lightGray
-            }
-        }
-        
-        mallNameLabel.text = data.mallName
-        productNameLabel.text = data.titleNoneHTML
-        productNameLabel.partiallyChanged(target, font: .capB, color: .meaningPrimary)
-        
-        priceLabel.text = data.price
-        
-        var config = likeButton.configuration ?? UIButton.Configuration.filled()
-        config.image = isLike ? .likeSelected : .likeUnselected
-        config.baseBackgroundColor = isLike ? .meaningWhite : .meaningBlack?.withAlphaComponent(0.5)
-        likeButton.configuration = config
-    }
-    
-    private func setLayout() {
+    override func setLayout() {
         [productImageView, mallNameLabel, productNameLabel, priceLabel, likeButton].forEach {
             contentView.addSubview($0)
         }
@@ -120,5 +82,33 @@ final class ResultCollectionViewCell: UICollectionViewCell {
             make.trailing.bottom.equalTo(productImageView).inset(16)
             make.size.equalTo(32)
         }
+    }
+    
+    func configureCell(_ data: Product, target: String, isLike: Bool) {
+        guard let imageURL = URL(string: data.image) else { return }
+        
+        DispatchQueue.global().async { [weak self] in
+            guard let self else { return }
+            do {
+                let data = try Data(contentsOf: imageURL)
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    productImageView.image = UIImage(data: data)
+                }
+            } catch {
+                productImageView.backgroundColor = .lightGray
+            }
+        }
+        
+        mallNameLabel.text = data.mallName
+        productNameLabel.text = data.titleNoneHTML
+        productNameLabel.partiallyChanged(target, font: .capB, color: .meaningPrimary)
+        
+        priceLabel.text = data.price
+        
+        var config = likeButton.configuration ?? UIButton.Configuration.filled()
+        config.image = isLike ? .likeSelected : .likeUnselected
+        config.baseBackgroundColor = isLike ? .meaningWhite : .meaningBlack?.withAlphaComponent(0.5)
+        likeButton.configuration = config
     }
 }

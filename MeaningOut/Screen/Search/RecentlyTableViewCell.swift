@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class RecentlyTableViewCell: UITableViewCell {
+final class RecentlyTableViewCell: BaseTableViewCell {
     static let identifier = "RecentlyTableViewCell"
     
     private let clockImageView: UIImageView = {
@@ -36,18 +36,8 @@ final class RecentlyTableViewCell: UITableViewCell {
         
         return button
     }()
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setLayout()
-    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setLayout(){
+    override func setLayout(){
         [clockImageView, searchLabel, deleteButton].forEach {
             contentView.addSubview($0)
         }

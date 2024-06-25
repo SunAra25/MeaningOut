@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CartTableViewCell: UITableViewCell {
+final class CartTableViewCell: BaseTableViewCell {
     static let identifier = "OtherTableViewCell"
     
     private let contentLabel: UILabel = {
@@ -31,18 +31,7 @@ final class CartTableViewCell: UITableViewCell {
         return label
     }()
     
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setLayout() {
+    override func setLayout() {
         [contentLabel, basketImageView, countLabel].forEach {
             contentView.addSubview($0)
         }

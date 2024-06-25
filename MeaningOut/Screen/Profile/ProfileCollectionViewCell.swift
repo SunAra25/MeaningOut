@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ProfileCollectionViewCell: UICollectionViewCell {
+final class ProfileCollectionViewCell: BaseCollectionViewCell {
     static let identifier = "ProfileCollectionViewCell"
     
     private let profileView = ProfileView()
@@ -19,21 +19,17 @@ final class ProfileCollectionViewCell: UICollectionViewCell {
         setLayout()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureCell(_ num: Int, radius: CGFloat, isSelected: Bool) {
-        profileView.configureView(isSelected ? .selected : .example, imageNum: num)
-        profileView.layer.cornerRadius = radius
-    }
-    
-    private func setLayout() {
+    override func setLayout() {
         contentView.addSubview(profileView)
         
         profileView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.height.equalTo(profileView.snp.width)
         }
+    }
+    
+    func configureCell(_ num: Int, radius: CGFloat, isSelected: Bool) {
+        profileView.configureView(isSelected ? .selected : .example, imageNum: num)
+        profileView.layer.cornerRadius = radius
     }
 }
