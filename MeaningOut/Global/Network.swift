@@ -8,10 +8,13 @@
 import UIKit
 import Alamofire
 
-struct Network {
+class Network {
+    static let shared = Network()
     let url = APIURL.searchURL
     
-    static func getSearchResult(_ target: String, start: Int, sort: SortBy, completionHandler: @escaping (Result<SearchResponse, NetworkError>) -> Void) {
+    private init() { }
+    
+    func getSearchResult(_ target: String, start: Int, sort: SortBy, completionHandler: @escaping (Result<SearchResponse, NetworkError>) -> Void) {
         let url = APIURL.searchURL
         
         let parameters: Parameters = [

@@ -156,7 +156,7 @@ final class ResultViewController: BaseViewController {
     }
     
     private func requestSearchResult(_ target: String) {
-        Network.getSearchResult(target, start: start, sort: sort) { [weak self] result in
+        Network.shared.getSearchResult(target, start: start, sort: sort) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let response):
