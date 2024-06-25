@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class SettingViewController: UIViewController {
+final class SettingViewController: BaseViewController {
     private let userDefaults = UserDefaultsManager()
     
     private lazy var profileView: UIView = {
@@ -76,23 +76,16 @@ final class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .meaningWhite
-        
         tableView.delegate = self
         tableView.dataSource = self
-        
-        setNavigation()
-        setHierachy()
-        setConstraints()
     }
 
-    private func setNavigation() {
+    override func setNavigation() {
+        super.setNavigation()
         navigationItem.title = NaviTitle.setting.rawValue
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
     
-    private func setHierachy() {
+    override func setHierachy() {
         [profileView, dividerView, tableView].forEach {
             view.addSubview($0)
         }
@@ -106,7 +99,7 @@ final class SettingViewController: UIViewController {
         }
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         profileView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(120)

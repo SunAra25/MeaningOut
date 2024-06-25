@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ResultViewController: UIViewController {
+final class ResultViewController: BaseViewController {
     private let userDefaults = UserDefaultsManager()
     
     private let totalCountLabel: UILabel = {
@@ -96,16 +96,6 @@ final class ResultViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         resultCollectionView.reloadData()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = .meaningWhite
-        
-        setNavigation()
-        setHierachy()
-        setConstraints()
     }
     
     init(searchTarget target: String) {

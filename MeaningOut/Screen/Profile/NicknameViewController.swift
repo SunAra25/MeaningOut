@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class NicknameViewController: UIViewController {
+final class NicknameViewController: BaseViewController {
     let userDefaults = UserDefaultsManager()
     
     private lazy var profileImageView: ProfileView = {
@@ -84,21 +84,15 @@ final class NicknameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .meaningWhite
         nicknameTextField.delegate = self
-        
-        setNavigation()
-        setHierachy()
-        setConstraints()
     }
     
-    private func setNavigation() {
+    override func setNavigation() {
+        super.setNavigation()
         navigationItem.title = NaviTitle.profileSetting.rawValue
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
     
-    private func setHierachy() {
+    override func setHierachy() {
         [profileImageView, cameraView, nicknameTextField, underlineView, messageLabel, completedButton].forEach {
             view.addSubview($0)
         }
@@ -106,7 +100,7 @@ final class NicknameViewController: UIViewController {
         cameraView.addSubview(cameraImageView)
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         profileImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide).inset(32)

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class EditProfileViewController: UIViewController {
+final class EditProfileViewController: BaseViewController {
     let userDefaults = UserDefaultsManager()
     
     private lazy var profileImageView: ProfileView = {
@@ -67,20 +67,9 @@ final class EditProfileViewController: UIViewController {
         nicknameTextField.text = currentName
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = .meaningWhite
-        
-        setNavigation()
-        setHierachy()
-        setConstraints()
-    }
-    
-    private func setNavigation() {
+    override func setNavigation() {
+        super.setNavigation()
         navigationItem.title = NaviTitle.profileEdit.rawValue
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = .meaningBlack
         
         let barButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveBtnDidTap))
         barButtonItem.isEnabled = false
@@ -89,7 +78,7 @@ final class EditProfileViewController: UIViewController {
         navigationItem.rightBarButtonItem = barButtonItem
     }
     
-    private func setHierachy() {
+    override func setHierachy() {
         [profileImageView, cameraView, nicknameTextField, underlineView, messageLabel].forEach {
             view.addSubview($0)
         }
@@ -97,7 +86,7 @@ final class EditProfileViewController: UIViewController {
         cameraView.addSubview(cameraImageView)
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         profileImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide).inset(32)

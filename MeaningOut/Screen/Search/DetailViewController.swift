@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import WebKit
 
-final class DetailViewController: UIViewController {
+final class DetailViewController: BaseViewController {
     private lazy var webView: WKWebView = {
         let view = WKWebView()
         if let url = urlLink {
@@ -30,34 +30,24 @@ final class DetailViewController: UIViewController {
             navigationItem.rightBarButtonItem?.image = newValue ? .likeSelected : .likeUnselected.withRenderingMode(.alwaysOriginal)
         }
     }
+    private let navigationTitle: String
     
     var completionHandler: ((Bool) -> ())?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = .meaningWhite
-        setLayout()
-    }
     
     init(productName: String, link: String, isLike: Bool) {
         urlLink = URL(string: link)
         self.isLike = isLike
-        
+        self.navigationTitle = productName
         super.init(nibName: nil, bundle: nil)
-        
-        setNavigation(productName)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setNavigation(_ title: String) {
+    override func setNavigation() {
+        super.setNavigation()
         navigationItem.title = title
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = .meaningBlack
         
         let barButtonItem = UIBarButtonItem(image: isLike ? UIImage.likeSelected : UIImage.likeUnselected.withRenderingMode(.alwaysOriginal),
                                             style: .plain, target: self, action: #selector(likeBtnDidTap))
@@ -66,10 +56,12 @@ final class DetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = barButtonItem
     }
     
-    private func setLayout() {
+    override func setHierachy() {
         view.addSubview(webView)
         view.addSubview(indicatorView)
-        
+    }
+    
+    override func setConstraints() {
         webView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }

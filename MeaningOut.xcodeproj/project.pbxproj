@@ -16,6 +16,7 @@
 		C00A9A192C1B1D380072AD75 /* NicknameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A9A182C1B1D380072AD75 /* NicknameError.swift */; };
 		C00A9A1D2C1BFD130072AD75 /* NaviTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A9A1C2C1BFD130072AD75 /* NaviTitle.swift */; };
 		C00A9A1F2C1C01D60072AD75 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00A9A1E2C1C01D60072AD75 /* ProfileCollectionViewCell.swift */; };
+		C027ACED2C2AB6E000B7CA1C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C027ACEC2C2AB6E000B7CA1C /* BaseViewController.swift */; };
 		C034EE762C1C161400076357 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034EE752C1C161400076357 /* ProfileViewController.swift */; };
 		C034EE782C1C1A5A00076357 /* ProfileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034EE772C1C1A5A00076357 /* ProfileType.swift */; };
 		C034EE7B2C1C2D2D00076357 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C034EE7A2C1C2D2D00076357 /* UserDefaultsManager.swift */; };
@@ -57,6 +58,7 @@
 		C00A9A182C1B1D380072AD75 /* NicknameError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameError.swift; sourceTree = "<group>"; };
 		C00A9A1C2C1BFD130072AD75 /* NaviTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaviTitle.swift; sourceTree = "<group>"; };
 		C00A9A1E2C1C01D60072AD75 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		C027ACEC2C2AB6E000B7CA1C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C034EE752C1C161400076357 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C034EE772C1C1A5A00076357 /* ProfileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileType.swift; sourceTree = "<group>"; };
 		C034EE7A2C1C2D2D00076357 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -157,9 +159,18 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		C027ACEB2C2AB6D200B7CA1C /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				C027ACEC2C2AB6E000B7CA1C /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		C034EE792C1C2CF500076357 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				C027ACEB2C2AB6D200B7CA1C /* Base */,
 				C00A9A142C1B0FE20072AD75 /* Components */,
 				C00A9A172C1B1D120072AD75 /* Enum */,
 				C0ED78AF2C1AFA5D0041885F /* Extension */,
@@ -319,6 +330,7 @@
 				C083143C2C1D7B6D0031405E /* DetailViewController.swift in Sources */,
 				C00A9A162C1B0FEE0072AD75 /* ProfileView.swift in Sources */,
 				C034EE8E2C1C8C6700076357 /* CapsuleButton.swift in Sources */,
+				C027ACED2C2AB6E000B7CA1C /* BaseViewController.swift in Sources */,
 				C08314382C1D27A00031405E /* ResultCollectionViewCell.swift in Sources */,
 				C061D0F12C2951A4007E9961 /* UIViewController+.swift in Sources */,
 				C009CAD12C200A8900134660 /* EditProfileViewController.swift in Sources */,

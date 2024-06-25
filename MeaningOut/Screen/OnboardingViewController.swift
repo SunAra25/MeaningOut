@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class OnboardingViewController: UIViewController {
+final class OnboardingViewController: BaseViewController {
     private let logoLabel: UILabel = {
         let label = UILabel()
         label.text = "MeaningOut"
@@ -41,28 +41,13 @@ final class OnboardingViewController: UIViewController {
         return button
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .meaningWhite
-        
-        setNavigation()
-        setHierachy()
-        setConstraints()
-    }
-    
-    private func setNavigation() {
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = .meaningBlack
-    }
-    
-    private func setHierachy() {
+    override func setHierachy() {
         view.addSubview(logoLabel)
         view.addSubview(imageView)
         view.addSubview(startButton)
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         imageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.horizontalEdges.equalToSuperview()

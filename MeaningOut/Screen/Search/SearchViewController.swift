@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class SearchViewController: UIViewController {
+final class SearchViewController: BaseViewController {
     let userDefaults = UserDefaultsManager()
     
     private let searchBar: UISearchBar = {
@@ -87,14 +87,9 @@ final class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .meaningWhite
         
-        setNavigation()
         setDelegate()
         setupKeyboardEvent()
-        setHierachy()
-        setConstraints()
     }
     
     private func setDelegate() {
@@ -117,15 +112,13 @@ final class SearchViewController: UIViewController {
         self.recentlyList = recentlyList
     }
     
-    private func setNavigation() {
+    override func setNavigation() {
+        super.setNavigation()
         let nickname = userDefaults.nickname
-        
         navigationItem.title = nickname + NaviTitle.search.rawValue
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = .meaningBlack
     }
     
-    private func setHierachy() {
+    override func setHierachy() {
         [searchBar, emptyView, searchView].forEach {
             view.addSubview($0)
         }
@@ -139,7 +132,7 @@ final class SearchViewController: UIViewController {
         }
     }
 
-    private func setConstraints() {
+    override func setConstraints() {
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(16)
