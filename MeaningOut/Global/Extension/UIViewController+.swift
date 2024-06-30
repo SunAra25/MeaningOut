@@ -8,6 +8,14 @@
 import UIKit
 
 extension UIViewController {
+    func setRootViewController<T: UIViewController>(_ rootViewController: T) {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        
+        sceneDelegate?.window?.rootViewController = rootViewController
+        sceneDelegate?.window?.makeKeyAndVisible()
+    }
+    
     func showTwoBtnAlert(title: String, message: String, completionHandler: @escaping () -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: "확인", style: .destructive) { _ in

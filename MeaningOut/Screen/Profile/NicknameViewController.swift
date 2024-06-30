@@ -165,13 +165,7 @@ final class NicknameViewController: BaseViewController {
         
         userDefaults.createdAt = createdAt
         
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        
-        let rootViewController = MainTabBarController()
-        
-        sceneDelegate?.window?.rootViewController = rootViewController
-        sceneDelegate?.window?.makeKeyAndVisible()
+        setRootViewController(MainTabBarController())
     }
 }
 

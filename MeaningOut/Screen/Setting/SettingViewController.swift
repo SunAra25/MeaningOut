@@ -181,13 +181,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let self else { return }
                 UserDefaultsManager.shared.resetInfo()
                 
-                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-                let sceneDelegate = windowScene?.delegate as? SceneDelegate
-                
-                let rootViewController = UINavigationController(rootViewController: OnboardingViewController())
-                
-                sceneDelegate?.window?.rootViewController = rootViewController
-                sceneDelegate?.window?.makeKeyAndVisible()
+                setRootViewController(UINavigationController(rootViewController: OnboardingViewController()))
             }
         default: break
         }
