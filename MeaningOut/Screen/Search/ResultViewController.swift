@@ -171,7 +171,7 @@ final class ResultViewController: BaseViewController {
                         resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                     }
                 }
-            case .failure(_):
+            case .failure(let error):
                 showOneBtnAlert(title: "데이터를 읽어오는 데 실패했습니다.", message: "잠시 후 다시 시도해주세요.") { [weak self] in
                     guard let self else { return }
                     navigationController?.popViewController(animated: true)
