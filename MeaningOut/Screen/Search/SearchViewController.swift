@@ -72,7 +72,8 @@ final class SearchViewController: BaseViewController {
         }
         
         willSet {
-            userDefaults.recentlySearch = newValue
+            let newDictionary = Dictionary(uniqueKeysWithValues: zip(newValue, (0..<newValue.count)))
+            userDefaults.recentlySearch = newDictionary
             
             tableView.isHidden = newValue.isEmpty
             emptyView.isHidden = !newValue.isEmpty
@@ -109,7 +110,8 @@ final class SearchViewController: BaseViewController {
         emptyView.isHidden = !recentlyList.isEmpty
         searchView.isHidden = recentlyList.isEmpty
         
-        self.recentlyList = recentlyList
+        let dic = recentlyList.sorted { $0.value < $1.value }
+        self.recentlyList = dic.map { $0.key }
     }
     
     override func setNavigation() {

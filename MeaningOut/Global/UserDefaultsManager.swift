@@ -8,6 +8,7 @@
 import Foundation
 
 class UserDefaultsManager {
+    static let shared = UserDefaultsManager()
     private let userDefaults = UserDefaults.standard
     private let formatter = DateFormatter()
     
@@ -31,9 +32,9 @@ class UserDefaultsManager {
         }
     }
     
-    var recentlySearch: [String]? {
+    var recentlySearch: [String : Int]? {
         get {
-            userDefaults.array(forKey: "recentlySearch") as? [String]
+            userDefaults.dictionary(forKey: "recentlySearch") as? [String : Int]
         }
         
         set {
@@ -41,9 +42,9 @@ class UserDefaultsManager {
         }
     }
     
-    var likeList: [String]? {
+    var likeList: [String : Bool]? {
         get {
-            userDefaults.array(forKey: "likeList") as? [String]
+            userDefaults.dictionary(forKey: "likeList") as? [String : Bool]
         }
         
         set {

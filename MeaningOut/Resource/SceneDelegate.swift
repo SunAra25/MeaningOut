@@ -10,14 +10,13 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let userDefaults = UserDefaultsManager()
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: scene)
         
-        let createdAt = userDefaults.createdAt
+        let createdAt = UserDefaultsManager.shared.createdAt
         let rootViewController = createdAt.isEmpty ? UINavigationController(rootViewController: OnboardingViewController()) : MainTabBarController()
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()

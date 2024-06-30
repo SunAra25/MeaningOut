@@ -9,8 +9,6 @@ import UIKit
 import SnapKit
 
 final class SettingViewController: BaseViewController {
-    private let userDefaults = UserDefaultsManager()
-    
     private lazy var profileView: UIView = {
         let view = UIView()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileViewDidTap))
@@ -18,23 +16,23 @@ final class SettingViewController: BaseViewController {
         view.backgroundColor = .meaningWhite
         return view
     }()
-    private lazy var profileImageView: ProfileView = {
-        let view = ProfileView(.user, imageNum: userDefaults.imageNum)
+    private let profileImageView: ProfileView = {
+        let view = ProfileView(.user, imageNum: UserDefaultsManager.shared.imageNum)
         view.layer.cornerRadius = 40
         return view
     }()
     private let labelView = UIView()
-    private lazy var nicknameLabel: UILabel = {
+    private let nicknameLabel: UILabel = {
         let label = UILabel()
-        label.text = userDefaults.nickname
+        label.text = UserDefaultsManager.shared.nickname
         label.textColor = .meaningBlack
         label.textAlignment = .left
         label.font = .headB
         return label
     }()
-    private lazy var dateLabel: UILabel = {
+    private let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = userDefaults.createdAt + "가입"
+        label.text = UserDefaultsManager.shared.createdAt + "가입"
         label.textColor = .meaningGray2
         label.textAlignment = .left
         label.font = .capM
@@ -68,8 +66,8 @@ final class SettingViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        profileImageView.changeImage(userDefaults.imageNum)
-        nicknameLabel.text = userDefaults.nickname
+        profileImageView.changeImage(UserDefaultsManager.shared.imageNum)
+        nicknameLabel.text = UserDefaultsManager.shared.nickname
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
     }
     
@@ -160,7 +158,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CartTableViewCell.identifier, for: indexPath) as! CartTableViewCell
-            let list = userDefaults.likeList
+            let list = UserDefaultsManager.shared.likeList
             
             cell.configureCell(data, numOfLike: list == nil ? 0 : list!.count)
             cell.selectionStyle = .none
@@ -181,7 +179,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         case .withdraw:
             showTwoBtnAlert(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?") { [weak self] in
                 guard let self else { return }
-                userDefaults.resetInfo()
+                UserDefaultsManager.shared.resetInfo()
                 
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 let sceneDelegate = windowScene?.delegate as? SceneDelegate

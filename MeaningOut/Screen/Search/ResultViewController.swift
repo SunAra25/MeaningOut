@@ -86,7 +86,8 @@ final class ResultViewController: BaseViewController {
     }
     private var likeList: [String] {
         willSet {
-            userDefaults.likeList = newValue
+            let newDictionary = Dictionary(uniqueKeysWithValues: zip(newValue, Array(repeating: true, count: newValue.count)))
+            userDefaults.likeList = newDictionary
         }
     }
     
@@ -102,7 +103,7 @@ final class ResultViewController: BaseViewController {
         self.target = target
         
         if let list = userDefaults.likeList {
-            likeList = list
+            likeList = Array(list.keys)
         } else {
             likeList = []
         }
