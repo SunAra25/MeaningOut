@@ -12,4 +12,5 @@ enum NaviTitle: String {
     case profileEdit = "EDIT PROFILE"
     case search = "님의 MEANING OUT"
     case setting = "SETTING"
+    case like = "LIKE LIST"
 }

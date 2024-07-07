@@ -20,11 +20,13 @@ class MainTabBarController: UITabBarController {
         UITabBar.appearance().unselectedItemTintColor = .meaningGray2
         
         let searchViewContrller = UINavigationController(rootViewController: SearchViewController())
+        let likeViewController = UINavigationController(rootViewController: LikeViewController())
         let settingViewController = UINavigationController(rootViewController: SettingViewController())
         
         searchViewContrller.tabBarItem = UITabBarItem(title: "검색", image: UIImage.magnifyingglass, tag: 0)
-        settingViewController.tabBarItem = UITabBarItem(title: "설정", image: UIImage.person, tag: 1)
+        likeViewController.tabBarItem = UITabBarItem(title: "좋아요", image: UIImage.heart, tag: 1)
+        settingViewController.tabBarItem = UITabBarItem(title: "설정", image: UIImage.person, tag: 2)
         
-        viewControllers = [searchViewContrller, settingViewController]
+        viewControllers = [searchViewContrller, likeViewController, settingViewController]
     }
 }

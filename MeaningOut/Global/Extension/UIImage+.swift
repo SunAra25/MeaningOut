@@ -14,5 +14,6 @@ extension UIImage {
     class var xmark: UIImage { return UIImage(systemName: "xmark")! }
     class var chevron: UIImage { return UIImage(systemName: "chevron.right")! }
     class var camera: UIImage { return UIImage(systemName: "camera.fill")! }
+    class var heart: UIImage { return UIImage(systemName: "heart")!}
 }
 
