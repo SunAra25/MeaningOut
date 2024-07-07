@@ -42,6 +42,7 @@
 		C08C54632C212FDC007D839B /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C54622C212FDC007D839B /* String+.swift */; };
 		C0A089432C3A6A71009DD829 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C0A089422C3A6A71009DD829 /* RealmSwift */; };
 		C0A089462C3A6AC8009DD829 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A089452C3A6AC8009DD829 /* LikeViewController.swift */; };
+		C0A0894E2C3A9D32009DD829 /* ProductTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A0894D2C3A9D32009DD829 /* ProductTable.swift */; };
 		C0ED78932C1AF5720041885F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78922C1AF5720041885F /* AppDelegate.swift */; };
 		C0ED78952C1AF5720041885F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78942C1AF5720041885F /* SceneDelegate.swift */; };
 		C0ED78972C1AF5720041885F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED78962C1AF5720041885F /* OnboardingViewController.swift */; };
@@ -87,6 +88,7 @@
 		C083143D2C1D93D10031405E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		C08C54622C212FDC007D839B /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		C0A089452C3A6AC8009DD829 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
+		C0A0894D2C3A9D32009DD829 /* ProductTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTable.swift; sourceTree = "<group>"; };
 		C0ED788F2C1AF5720041885F /* MeaningOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeaningOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0ED78922C1AF5720041885F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0ED78942C1AF5720041885F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 		C034EE792C1C2CF500076357 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				C0A0894C2C3A9D20009DD829 /* Database */,
 				C027ACEB2C2AB6D200B7CA1C /* Base */,
 				C00A9A142C1B0FE20072AD75 /* Components */,
 				C00A9A172C1B1D120072AD75 /* Enum */,
@@ -221,6 +224,14 @@
 				C0A089452C3A6AC8009DD829 /* LikeViewController.swift */,
 			);
 			path = Like;
+			sourceTree = "<group>";
+		};
+		C0A0894C2C3A9D20009DD829 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				C0A0894D2C3A9D32009DD829 /* ProductTable.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		C0ED78862C1AF5720041885F = {
@@ -350,6 +361,7 @@
 				C083143E2C1D93D10031405E /* MainTabBarController.swift in Sources */,
 				C083143C2C1D7B6D0031405E /* DetailViewController.swift in Sources */,
 				C00A9A162C1B0FEE0072AD75 /* ProfileView.swift in Sources */,
+				C0A0894E2C3A9D32009DD829 /* ProductTable.swift in Sources */,
 				C034EE8E2C1C8C6700076357 /* CapsuleButton.swift in Sources */,
 				C027ACED2C2AB6E000B7CA1C /* BaseViewController.swift in Sources */,
 				C08314382C1D27A00031405E /* ResultCollectionViewCell.swift in Sources */,
