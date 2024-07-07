@@ -63,7 +63,9 @@ extension LikeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return UICollectionViewCell()}
-        cell.configureCell(list[indexPath.row])
+        
+        let image = loadImageToDocument(filename: list[indexPath.row].productId)
+        cell.configureCell(list[indexPath.row], image: image)
         return cell
     }
 }

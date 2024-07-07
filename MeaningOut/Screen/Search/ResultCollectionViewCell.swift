@@ -112,7 +112,7 @@ final class ResultCollectionViewCell: BaseCollectionViewCell {
         likeButton.configuration = config
     }
     
-    func configureCell(_ data: ProductTable) {
+    func configureCell(_ data: ProductTable, image: UIImage?) {
         mallNameLabel.text = data.mallName
         productNameLabel.text = data.title
         
@@ -122,5 +122,8 @@ final class ResultCollectionViewCell: BaseCollectionViewCell {
         config.image = .likeSelected
         config.baseBackgroundColor = .meaningWhite
         likeButton.configuration = config
+        
+        guard let image else { return }
+        productImageView.image = image
     }
 }

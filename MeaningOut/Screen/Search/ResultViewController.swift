@@ -204,10 +204,27 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
             guard let self else { return }
             
             if isContains && !isLike {
+                removeImageFromDocument(filename: data.productId)
                 repository.deleteItem(primary: data.productId)
             } else if !isContains && isLike {
                 let item = ProductTable(productId: data.productId, title: data.titleNoneHTML, mallName: data.mallName, link: data.link, price: data.price)
                 repository.createItem(item)
+                
+                if let imageURL = URL(string: data.image) {
+                    DispatchQueue.global().async {
+                        do {
+                            let imageData = try Data(contentsOf: imageURL)
+                            if let image = UIImage(data: imageData) {
+                                DispatchQueue.main.async { [weak self] in
+                                    guard let self else { return }
+                                    saveImageToDocument(image: image, filename: data.productId)
+                                }
+                            }
+                        } catch {
+                            print("Faild to image download")
+                        }
+                    }
+                }
             }
         }
         
@@ -219,10 +236,27 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let isContains = likeList.contains(where: {$0.productId == data.productId})
         
         if isContains {
+            removeImageFromDocument(filename: data.productId)
             repository.deleteItem(primary: data.productId)
         } else {
             let item = ProductTable(productId: data.productId, title: data.titleNoneHTML, mallName: data.mallName, link: data.link, price: data.price)
             repository.createItem(item)
+            
+            if let imageURL = URL(string: data.image) {
+                DispatchQueue.global().async {
+                    do {
+                        let imageData = try Data(contentsOf: imageURL)
+                        if let image = UIImage(data: imageData) {
+                            DispatchQueue.main.async { [weak self] in
+                                guard let self else { return }
+                                saveImageToDocument(image: image, filename: data.productId)
+                            }
+                        }
+                    } catch {
+                        print("Faild to image download")
+                    }
+                }
+            }
         }
         
         resultCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])
