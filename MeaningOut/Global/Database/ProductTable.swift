@@ -9,8 +9,7 @@ import RealmSwift
 import Foundation
 
 class ProductTable: Object {
-    @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted(indexed: true) var productId: String
+    @Persisted(primaryKey: true) var productId: String
     @Persisted var title: String
     @Persisted var mallName: String
     @Persisted var link: String

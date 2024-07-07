@@ -42,16 +42,6 @@ class UserDefaultsManager {
         }
     }
     
-    var likeList: [String : Bool]? {
-        get {
-            userDefaults.dictionary(forKey: "likeList") as? [String : Bool]
-        }
-        
-        set {
-            userDefaults.set(newValue, forKey: "likeList")
-        }
-    }
-    
     var createdAt: String {
         get {
             userDefaults.string(forKey: "createdAt") ?? ""

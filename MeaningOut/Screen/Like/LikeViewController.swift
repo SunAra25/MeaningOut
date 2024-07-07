@@ -42,6 +42,7 @@ final class LikeViewController: BaseViewController {
     override func setNavigation() {
         super.setNavigation()
         navigationItem.title = NaviTitle.like.rawValue
+        repository.printFileURL()
     }
     
     override func setHierachy() {

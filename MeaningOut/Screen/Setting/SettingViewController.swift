@@ -61,7 +61,7 @@ final class SettingViewController: BaseViewController {
         
         return table
     }()
-    
+    private let repository = ProductRepository()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -158,9 +158,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: CartTableViewCell.identifier, for: indexPath) as! CartTableViewCell
-            let list = UserDefaultsManager.shared.likeList
+            let listCount = repository.fetchLikeList().count
             
-            cell.configureCell(data, numOfLike: list == nil ? 0 : list!.count)
+            cell.configureCell(data, numOfLike: listCount)
             cell.selectionStyle = .none
             return cell
         } else {

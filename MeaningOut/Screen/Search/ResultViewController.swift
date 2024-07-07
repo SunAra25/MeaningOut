@@ -84,13 +84,9 @@ final class ResultViewController: BaseViewController {
             requestSearchResult(target)
         }
     }
-    private var likeList: [String] {
-        willSet {
-            let newDictionary = Dictionary(uniqueKeysWithValues: zip(newValue, Array(repeating: true, count: newValue.count)))
-            userDefaults.likeList = newDictionary
-        }
-    }
+    private lazy var likeList = repository.fetchLikeList()
     
+    private let repository = ProductRepository()
     private let target: String
     private var start = 1
     
@@ -101,12 +97,6 @@ final class ResultViewController: BaseViewController {
     
     init(searchTarget target: String) {
         self.target = target
-        
-        if let list = userDefaults.likeList {
-            likeList = Array(list.keys)
-        } else {
-            likeList = []
-        }
         
         super.init(nibName: nil, bundle: nil)
         
@@ -199,7 +189,7 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as! ResultCollectionViewCell
         let data = searchResult.items[indexPath.row]
         
-        cell.configureCell(data, target: target, isLike: likeList.contains(data.productId))
+        cell.configureCell(data, target: target, isLike: likeList.contains(where: {$0.productId == data.productId}))
         cell.likeButton.tag = indexPath.row
         cell.likeButton.addTarget(self, action: #selector(likeBtnDidTap), for: .touchUpInside)
         return cell
@@ -207,16 +197,17 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let data = searchResult.items[indexPath.row]
-        let isContains = likeList.contains(data.productId)
+        let isContains = likeList.contains(where: {$0.productId == data.productId})
         let nextVC = DetailViewController(productName: data.titleNoneHTML, link: data.link, isLike: isContains)
         
         nextVC.completionHandler = { [weak self] isLike in
             guard let self else { return }
             
             if isContains && !isLike {
-                likeList.removeAll { $0 == data.productId }
+                repository.deleteItem(primary: data.productId)
             } else if !isContains && isLike {
-                likeList.append(data.productId)
+                let item = ProductTable(productId: data.productId, title: data.titleNoneHTML, mallName: data.mallName, link: data.link, price: data.price)
+                repository.createItem(item)
             }
         }
         
@@ -224,13 +215,14 @@ extension ResultViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     @objc private func likeBtnDidTap(sender: UIButton) {
-        let productId = searchResult.items[sender.tag].productId
-        let isContains = likeList.contains(productId)
+        let data = searchResult.items[sender.tag]
+        let isContains = likeList.contains(where: {$0.productId == data.productId})
         
         if isContains {
-            likeList.removeAll { $0 == productId }
+            repository.deleteItem(primary: data.productId)
         } else {
-            likeList.append(productId)
+            let item = ProductTable(productId: data.productId, title: data.titleNoneHTML, mallName: data.mallName, link: data.link, price: data.price)
+            repository.createItem(item)
         }
         
         resultCollectionView.reloadItems(at: [IndexPath(item: sender.tag, section: 0)])

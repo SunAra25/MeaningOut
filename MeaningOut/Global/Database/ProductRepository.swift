@@ -26,7 +26,9 @@ final class ProductRepository {
         return realm.objects(ProductTable.self)
     }
     
-    func deleteItem(_ item: ProductTable) {
+    func deleteItem(primary key: String) {
+        let item = realm.object(ofType: ProductTable.self, forPrimaryKey: key)!
+        
         try! realm.write {
             realm.delete(item)
         }
