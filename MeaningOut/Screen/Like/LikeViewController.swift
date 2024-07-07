@@ -9,10 +9,28 @@ import UIKit
 import SnapKit
 
 final class LikeViewController: BaseViewController {
-    private let tableView = {
-        let view = UITableView()
-        view.backgroundColor = .red
+    private lazy var collectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        view.delegate = self
+        view.dataSource = self
+        view.register(ResultCollectionViewCell.self, forCellWithReuseIdentifier: ResultCollectionViewCell.identifier)
         return view
+    }()
+    private let flowLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        
+        layout.minimumLineSpacing = 16
+        layout.minimumInteritemSpacing = 16
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let inset: CGFloat = 16
+        let padding: CGFloat = 16
+        let width = (screenWidth - inset * 2 - padding ) / 2
+        
+        layout.itemSize = CGSize(width: width, height: width * 1.8)
+        layout.sectionInset = UIEdgeInsets.init(top: 16, left: 16, bottom: 0, right: 16)
+        
+        return layout
     }()
     
     override func setNavigation() {
@@ -21,12 +39,24 @@ final class LikeViewController: BaseViewController {
     }
     
     override func setHierachy() {
-        view.addSubview(tableView)
+        view.addSubview(collectionView)
     }
     
     override func setConstraints() {
-        tableView.snp.makeConstraints { make in
+        collectionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+}
+
+extension LikeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return UICollectionViewCell()}
+        
+        return cell
     }
 }
