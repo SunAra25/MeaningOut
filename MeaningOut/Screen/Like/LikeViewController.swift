@@ -39,6 +39,15 @@ final class LikeViewController: BaseViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(reloadCollectionView),
+            name: NSNotification.Name("UpdateProductTable"),
+            object: nil
+        )
+    }
     override func setNavigation() {
         super.setNavigation()
         navigationItem.title = NaviTitle.like.rawValue
@@ -54,6 +63,10 @@ final class LikeViewController: BaseViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
+    @objc func reloadCollectionView() {
+        collectionView.reloadData()
+    }
 }
 
 extension LikeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -64,8 +77,19 @@ extension LikeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return UICollectionViewCell()}
         
-        let image = loadImageToDocument(filename: list[indexPath.row].productId)
+        let id = list[indexPath.row].productId
+        let image = loadImageToDocument(filename: id)
         cell.configureCell(list[indexPath.row], image: image)
+        cell.likeButton.tag = indexPath.row
+        cell.likeButton.addTarget(self, action: #selector(likeBtnDidTap), for: .touchUpInside)
         return cell
+    }
+    
+    @objc private func likeBtnDidTap(sender: UIButton) {
+        let data = list[sender.tag]
+        removeImageFromDocument(filename: data.productId)
+        repository.deleteItem(primary: data.productId)
+        
+        collectionView.reloadData()
     }
 }

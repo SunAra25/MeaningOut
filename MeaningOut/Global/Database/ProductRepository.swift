@@ -18,7 +18,7 @@ final class ProductRepository {
     func createItem(_ data: ProductTable) {
         try! realm.write {
             realm.add(data)
-            print("Realm Crete Success")
+            NotificationCenter.default.post(Notification(name: NSNotification.Name("UpdateProductTable")))
         }
     }
     
@@ -31,6 +31,7 @@ final class ProductRepository {
         
         try! realm.write {
             realm.delete(item)
+            NotificationCenter.default.post(Notification(name: NSNotification.Name("UpdateProductTable")))
         }
     }
 }
