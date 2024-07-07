@@ -16,8 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         sleep(2)
         
-        let config = Realm.Configuration(schemaVersion: 1) { migration, oldSchemaVersion in
+        let config = Realm.Configuration(schemaVersion: 2) { migration, oldSchemaVersion in
             if oldSchemaVersion > 1 { }
+            if oldSchemaVersion < 2 { }
         }
         
         Realm.Configuration.defaultConfiguration = config

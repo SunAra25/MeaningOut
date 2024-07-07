@@ -14,6 +14,7 @@ class ProductTable: Object {
     @Persisted var mallName: String
     @Persisted var link: String
     @Persisted var price: String
+    @Persisted var createdAt: Date
     
     convenience init(productId: String, title: String, mallName: String, link: String, price: String) {
         self.init()
@@ -22,5 +23,6 @@ class ProductTable: Object {
         self.mallName = mallName
         self.link = link
         self.price = price
+        self.createdAt = Date()
     }
 }

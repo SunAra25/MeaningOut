@@ -23,7 +23,7 @@ final class ProductRepository {
     }
     
     func fetchLikeList() -> Results<ProductTable> {
-        return realm.objects(ProductTable.self)
+        return realm.objects(ProductTable.self).sorted(byKeyPath: "createdAt", ascending: false)
     }
     
     func deleteItem(primary key: String) {
