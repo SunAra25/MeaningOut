@@ -32,6 +32,12 @@ final class LikeViewController: BaseViewController {
         
         return layout
     }()
+    private let repository = ProductRepository()
+    private lazy var list = repository.fetchLikeList() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     override func setNavigation() {
         super.setNavigation()
@@ -51,12 +57,12 @@ final class LikeViewController: BaseViewController {
 
 extension LikeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        return list.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultCollectionViewCell.identifier, for: indexPath) as? ResultCollectionViewCell else { return UICollectionViewCell()}
-        
+        cell.configureCell(list[indexPath.row])
         return cell
     }
 }

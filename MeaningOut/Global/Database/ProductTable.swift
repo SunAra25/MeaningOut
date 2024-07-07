@@ -8,7 +8,7 @@
 import RealmSwift
 import Foundation
 
-class TodoTable: Object {
+class ProductTable: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted(indexed: true) var productId: String
     @Persisted var title: String

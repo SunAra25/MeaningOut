@@ -111,4 +111,16 @@ final class ResultCollectionViewCell: BaseCollectionViewCell {
         config.baseBackgroundColor = isLike ? .meaningWhite : .meaningBlack?.withAlphaComponent(0.5)
         likeButton.configuration = config
     }
+    
+    func configureCell(_ data: ProductTable) {
+        mallNameLabel.text = data.mallName
+        productNameLabel.text = data.title
+        
+        priceLabel.text = data.price
+        
+        var config = likeButton.configuration ?? UIButton.Configuration.filled()
+        config.image = .likeSelected
+        config.baseBackgroundColor = .meaningWhite
+        likeButton.configuration = config
+    }
 }
