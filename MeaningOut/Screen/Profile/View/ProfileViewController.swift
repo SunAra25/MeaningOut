@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 final class ProfileViewController: BaseViewController {
+    private lazy var viewModel = ProfileViewModel(imageNum)
+    
     private lazy var profileView: ProfileView = {
         let view = ProfileView(.user, imageNum: imageNum)
         
@@ -56,17 +58,8 @@ final class ProfileViewController: BaseViewController {
         return layout
     }()
     
-    var imageNum: Int {
-        didSet {
-            collectionView.reloadData()
-        }
-        
-        willSet {
-            profileView.changeImage(newValue)
-        }
-    }
+    var imageNum: Int
     let navigationTitle: NaviTitle
-    
     var completionHandler: ((Int) -> ())?
     
     override func viewDidLoad() {
@@ -74,12 +67,13 @@ final class ProfileViewController: BaseViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        bindData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        completionHandler?(imageNum)
+        viewModel.inputWillDisappear.value = ()
     }
     
     init(imageNum: Int, title: NaviTitle) {
@@ -127,6 +121,20 @@ final class ProfileViewController: BaseViewController {
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
+    func bindData() {
+        viewModel.outputChangeProfileImage.bind { [weak self] imgNum in
+            guard let self, let imgNum else { return }
+            imageNum = imgNum
+            profileView.changeImage(imgNum)
+            collectionView.reloadData()
+        }
+        
+        viewModel.outputPopVC.bind { [weak self] imgNum in
+            guard let self, let imgNum else { return }
+            completionHandler?(imgNum)
+        }
+    }
 }
 
 extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -146,6 +154,6 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        imageNum = indexPath.row
+        viewModel.inputNewImageNum.value = indexPath.row
     }
 }
