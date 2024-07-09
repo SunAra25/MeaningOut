@@ -16,9 +16,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         
-        let createdAt = UserDefaultsManager.shared.createdAt
-        let rootViewController = createdAt.isEmpty ? UINavigationController(rootViewController: OnboardingViewController()) : MainTabBarController()
-        window?.rootViewController = rootViewController
+//        let createdAt = UserDefaultsManager.shared.createdAt
+//        let rootViewController = createdAt.isEmpty ? UINavigationController(rootViewController: OnboardingViewController()) : MainTabBarController()
+        window?.rootViewController = UINavigationController(rootViewController: NicknameViewController())
         window?.makeKeyAndVisible()
     }
 

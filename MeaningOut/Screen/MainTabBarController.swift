@@ -12,6 +12,7 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        print("Main", #function)
     }
 
     private func setUI() {

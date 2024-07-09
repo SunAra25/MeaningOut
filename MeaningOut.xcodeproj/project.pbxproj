@@ -40,6 +40,8 @@
 		C083143C2C1D7B6D0031405E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C083143B2C1D7B6D0031405E /* DetailViewController.swift */; };
 		C083143E2C1D93D10031405E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C083143D2C1D93D10031405E /* MainTabBarController.swift */; };
 		C08C54632C212FDC007D839B /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08C54622C212FDC007D839B /* String+.swift */; };
+		C09A64892C3D251F00C70F20 /* NicknameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A64882C3D251F00C70F20 /* NicknameViewModel.swift */; };
+		C09A648B2C3D26BF00C70F20 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A648A2C3D26BF00C70F20 /* Observable.swift */; };
 		C0A089432C3A6A71009DD829 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C0A089422C3A6A71009DD829 /* RealmSwift */; };
 		C0A089462C3A6AC8009DD829 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A089452C3A6AC8009DD829 /* LikeViewController.swift */; };
 		C0A0894E2C3A9D32009DD829 /* ProductTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A0894D2C3A9D32009DD829 /* ProductTable.swift */; };
@@ -88,6 +90,8 @@
 		C083143B2C1D7B6D0031405E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C083143D2C1D93D10031405E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		C08C54622C212FDC007D839B /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		C09A64882C3D251F00C70F20 /* NicknameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewModel.swift; sourceTree = "<group>"; };
+		C09A648A2C3D26BF00C70F20 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		C0A089452C3A6AC8009DD829 /* LikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		C0A0894D2C3A9D32009DD829 /* ProductTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTable.swift; sourceTree = "<group>"; };
 		C0A0894F2C3AA117009DD829 /* ProductRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepository.swift; sourceTree = "<group>"; };
@@ -144,9 +148,8 @@
 		C00A9A112C1B0A3D0072AD75 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				C00A9A122C1B0A5E0072AD75 /* NicknameViewController.swift */,
-				C034EE752C1C161400076357 /* ProfileViewController.swift */,
-				C00A9A1E2C1C01D60072AD75 /* ProfileCollectionViewCell.swift */,
+				C09A64872C3D250900C70F20 /* View */,
+				C09A64862C3D250300C70F20 /* ViewModel */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				C034EE7A2C1C2D2D00076357 /* UserDefaultsManager.swift */,
 				C08314392C1D5E9A0031405E /* Product.swift */,
 				C04C44402C241C3000995095 /* Network.swift */,
+				C09A648A2C3D26BF00C70F20 /* Observable.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -218,6 +222,24 @@
 				C009CAD02C200A8900134660 /* EditProfileViewController.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		C09A64862C3D250300C70F20 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C09A64882C3D251F00C70F20 /* NicknameViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C09A64872C3D250900C70F20 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C00A9A122C1B0A5E0072AD75 /* NicknameViewController.swift */,
+				C034EE752C1C161400076357 /* ProfileViewController.swift */,
+				C00A9A1E2C1C01D60072AD75 /* ProfileCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C0A089442C3A6AB3009DD829 /* Like */ = {
@@ -369,7 +391,9 @@
 				C027ACED2C2AB6E000B7CA1C /* BaseViewController.swift in Sources */,
 				C08314382C1D27A00031405E /* ResultCollectionViewCell.swift in Sources */,
 				C061D0F12C2951A4007E9961 /* UIViewController+.swift in Sources */,
+				C09A648B2C3D26BF00C70F20 /* Observable.swift in Sources */,
 				C0A089462C3A6AC8009DD829 /* LikeViewController.swift in Sources */,
+				C09A64892C3D251F00C70F20 /* NicknameViewModel.swift in Sources */,
 				C009CAD12C200A8900134660 /* EditProfileViewController.swift in Sources */,
 				C083143A2C1D5E9A0031405E /* Product.swift in Sources */,
 				C034EE8C2C1C8A6400076357 /* SortBy.swift in Sources */,

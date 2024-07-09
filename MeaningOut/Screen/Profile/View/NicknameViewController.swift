@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 
 final class NicknameViewController: BaseViewController {
-    let userDefaults = UserDefaultsManager()
+    private let viewModel = NicknameViewModel()
     
     private lazy var profileImageView: ProfileView = {
-        let view = ProfileView(.user, imageNum: random)
+        let view = ProfileView(.user, imageNum: viewModel.inputNewImageNum.value ?? 0)
         view.layer.cornerRadius = 50
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileDidTap))
@@ -75,16 +75,10 @@ final class NicknameViewController: BaseViewController {
         return button
     }()
     
-    private var random = Int.random(in: 0...11) {
-        willSet {
-            profileImageView.changeImage(newValue)
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         nicknameTextField.delegate = self
+        bindData()
     }
     
     override func setNavigation() {
@@ -141,31 +135,51 @@ final class NicknameViewController: BaseViewController {
         }
     }
     
-    @objc private func profileDidTap() {
-        let nextVC = ProfileViewController(imageNum: random, title: .profileSetting)
-        
-        nextVC.completionHandler = { imageNum in
-            self.random = imageNum
+    func bindData() {
+        var isInitialLoad = true
+        viewModel.outputShowProfileView.bind { [weak self] imgNum in
+            guard let self else { return }
+            let nextVC = ProfileViewController(imageNum: imgNum, title: .profileSetting)
+            
+            nextVC.completionHandler = { [weak self] imageNum in
+                guard let self else { return }
+                viewModel.inputNewImageNum.value = imageNum
+            }
+            
+            if isInitialLoad {
+                return
+            }
+            navigationController?.pushViewController(nextVC, animated: true)
         }
         
-        navigationController?.pushViewController(nextVC, animated: true)
+        viewModel.outputChangeProfileImage.bind { [weak self] imgNum in
+            guard let self else { return }
+            
+            if isInitialLoad {
+                return
+            }
+            profileImageView.changeImage(imgNum)
+        }
+        
+        viewModel.outputSetRootVC.bind { [weak self] _ in
+            guard let self else { return }
+            
+            if isInitialLoad {
+                return
+            }
+            setRootViewController(MainTabBarController())
+        }
+        
+        isInitialLoad = false
+    }
+    
+    @objc private func profileDidTap() {
+        viewModel.inputProfileBtnTap.value = ()
     }
     
     @objc private func completedBtnDidTap() {
         guard let nickname = nicknameTextField.text else { return }
-        
-        userDefaults.nickname = nickname
-        userDefaults.imageNum = random
-        
-        let current = Date()
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "yyyy. MM. dd "
-        let createdAt = formatter.string(from: current)
-        
-        userDefaults.createdAt = createdAt
-        
-        setRootViewController(MainTabBarController())
+        viewModel.inputCompletedBtnTap.value = nickname
     }
 }
 
